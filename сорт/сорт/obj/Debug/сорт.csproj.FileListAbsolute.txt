@@ -1,0 +1,45 @@
+C:\Users\ivans\source\repos\сорт\сорт\bin\Debug\сорт.exe.config
+C:\Users\ivans\source\repos\сорт\сорт\bin\Debug\сорт.exe
+C:\Users\ivans\source\repos\сорт\сорт\bin\Debug\сорт.pdb
+C:\Users\ivans\source\repos\сорт\сорт\obj\Debug\сорт.csproj.AssemblyReference.cache
+C:\Users\ivans\source\repos\сорт\сорт\obj\Debug\сорт.csproj.SuggestedBindingRedirects.cache
+C:\Users\ivans\source\repos\сорт\сорт\obj\Debug\сорт.Form1.resources
+C:\Users\ivans\source\repos\сорт\сорт\obj\Debug\сорт.Properties.Resources.resources
+C:\Users\ivans\source\repos\сорт\сорт\obj\Debug\сорт.csproj.GenerateResource.cache
+C:\Users\ivans\source\repos\сорт\сорт\obj\Debug\сорт.csproj.CoreCompileInputs.cache
+C:\Users\ivans\source\repos\сорт\сорт\obj\Debug\сорт.exe
+C:\Users\ivans\source\repos\сорт\сорт\obj\Debug\сорт.pdb
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\bin\Debug\сорт.exe.config
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\bin\Debug\сорт.exe
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\bin\Debug\сорт.pdb
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.csproj.AssemblyReference.cache
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.Form1.resources
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.Properties.Resources.resources
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.csproj.GenerateResource.cache
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.csproj.CoreCompileInputs.cache
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.exe
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.pdb
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\bin\Debug\сорт.exe.config
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\bin\Debug\сорт.exe
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\bin\Debug\сорт.pdb
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.csproj.AssemblyReference.cache
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.Form1.resources
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.Properties.Resources.resources
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.csproj.GenerateResource.cache
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.csproj.CoreCompileInputs.cache
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.exe
+D:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.pdb
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\bin\Debug\сорт.exe.config
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\bin\Debug\сорт.exe
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\bin\Debug\сорт.pdb
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\obj\Debug\сорт.csproj.AssemblyReference.cache
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\obj\Debug\сорт.csproj.SuggestedBindingRedirects.cache
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\obj\Debug\сорт.Form1.resources
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\obj\Debug\сорт.Properties.Resources.resources
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\obj\Debug\сорт.csproj.GenerateResource.cache
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\obj\Debug\сорт.csproj.CoreCompileInputs.cache
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\obj\Debug\сорт.exe
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\obj\Debug\сорт.pdb
+C:\Users\ivans\OneDrive\Рабочий стол\проект\сорт\сорт\obj\Debug\сорт.Form2.resources
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.Form2.resources
+E:\практические работы\третий семестор\тест_работа\сорт\сорт\obj\Debug\сорт.csproj.SuggestedBindingRedirects.cache
