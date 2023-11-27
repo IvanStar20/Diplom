@@ -304,15 +304,8 @@ namespace сорт
         private void button3_Click(object sender, EventArgs e)
         {
             if (random.Count > 0)
-            {
-                if (textBox1.Text.Length == 0)
-                {
-                    count1 = Convert.ToInt32(comboBox1.SelectedItem);
-                }
-                else
-                {
-                    count1 = random.Count;
-                }
+            { 
+                count1 = random.Count;
                 spid = Convert.ToInt32(trackBar1.Value);
                 switch (comboBox2.SelectedItem)
                 {
