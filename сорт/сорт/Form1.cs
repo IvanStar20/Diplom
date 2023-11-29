@@ -95,7 +95,7 @@ namespace сорт
             picture.Location = new Point(x, y);
             this.Controls.Add(picture);
         }
-        //Случайние элемент для сортировки
+        //Случайные элементы для сортировки
         public void rand(int count)
         {
             List<int> list = new List<int>();
@@ -974,32 +974,6 @@ namespace сорт
         private void button1_Click_1(object sender, EventArgs e)
         {
             
-            /*if ((combo1selected == 1 || textBox1.Text.Length > 0) == true && random.Count > 0)
-            {
-                
-                List<int> list = new List<int>();
-                for (int i = 0; i < random.Count; i++)
-                {
-                    list.Add(random[i]);
-                }
-                button4_Click(sender, e);
-                string all = "";
-                for (int i = 0; i < list.Count; i++)
-                {
-                    random.Add(list[i]);
-                    all += $"| {list[i]} |";             
-                }
-                listBox1.Items.Add(all);               
-                newbox();              
-                list.Clear();
-                button2.Enabled = false;
-                button3.Enabled = true;
-            }
-            else
-            {
-                MessageBox.Show("Ошибка изменения размера элементов !\nВозможные причины:\n1) Не верно введены данные.\n2) Элементы не были созданны.");
-            }*/
-           
         }
 
         //Сортировка вставкой
