@@ -1663,6 +1663,24 @@ namespace сорт
         private void button7_Click(object sender, EventArgs e)
         {
             Form2 form = new Form2();
+            if(selected == 1)
+            {
+                switch (comboBox2.SelectedItem)
+                {
+                    case "сортировка пузырьком":
+                        form.name = "text\\text1.txt";
+                        break;
+                    case "сортировка перемешиванием":
+                        form.name = "text\\text2.txt";
+                        break;
+                    case "сортировка вставками":
+                        form.name = "text\\text3.txt";
+                        break;
+                    case "сортировка подсчетом 2":
+                        form.name = "text\\text4.txt";
+                        break;
+                }
+            }
             form.Show();
         }
 

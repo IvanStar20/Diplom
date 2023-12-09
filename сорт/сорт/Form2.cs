@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,100 +17,50 @@ namespace сорт
         public Form2()
         {
             InitializeComponent();
-            timer2.Start();
+            textBox1.ReadOnly = true;
+            textBox1.TabStop = false;
         }
+        public string name { get; set; }
 
-        
-        private void timer1_Tick(object sender, EventArgs e)
+        public int size = 16;
+
+        public List<string> fails = new List<string>();
+
+        public string clean()
         {
-            /*pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Width = this.Width;
-            pictureBox1.Height = this.Height;
-            Random rnd = new Random();
-            Color color = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
-            pictureBox1.BackColor = color;*/
-
+            FileInfo fi = new FileInfo(name);
+            string[] splitfail = fi.FullName.Split(new char[] { '\\' });
+            foreach(string s in splitfail)
+            {
+                fails.Add(s);
+            }
+            fails.Remove("bin");
+            fails.Remove("Debug");
+            string complit = String.Join("\\", fails);
+            return complit;
+        }
+      
+        public async void read()
+        {
+            string text = "";
+            string pas = clean();
+            using (StreamReader reader = new StreamReader(pas, Encoding.GetEncoding(1251)))
+            {
+                text = reader.ReadToEnd();
+            }
+            textBox1.Text = text;
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            /*timer1.Start();
-            this.TopMost = true;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;*/
+            read();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form2_Resize(object sender, EventArgs e)
         {
-            string[] mass = textBox1.Text.Split(',');
-            int max = Convert.ToInt32(mass[0]);
-            for(int i = 0; i < mass.Length; i++)
-            {
-                if(max < Convert.ToInt32(mass[i]))
-                {
-                    max = Convert.ToInt32(mass[i]);
-                }
-            }
-            int[] count = new int[max + 1];
-            foreach (string value in mass)
-            {
-                count[Convert.ToInt32(value)]++;
-                
-            }
-            for(int i = 0; i < count.Length; i++)
-            {
-                listBox2.Items.Add(count[i]);
-            }
-            int[] sorted = new int[mass.Length];
-            int index = 0;
 
-            for (int i = 0; i < count.Length; i++)
-            {
-                while (count[i] > 0)
-                {
-                    sorted[index] = i;
-                    index++;
-                    count[i]--;
-                }
-            }
-            foreach(int v in sorted)
-            {
-                listBox1.Items.Add(v);
-            }
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            if(w == true)
-            {
-                label1.Location = new Point(label1.Location.X + 10, label1.Location.Y);
-            }
-            if(d == true)
-            {
-                label1.Location = new Point(label1.Location.X - 10, label1.Location.Y);
-            }
-            
-        }
-        public bool w = false;
-        public bool d = false;
-        private void Form2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if(e.KeyChar == (char)Keys.A)
-            {
-                w = true;
-            }
-            else
-            {
-                w = false;
-            }
-            if(e.KeyChar == (char)Keys.D)
-            {
-                d = true;
-            }
-            else
-            {
-                d = false;
-            }
+            Font font = new Font("Times New Roman", this.Width/100 + 10 > 10?this.Width / 100 + 5:10);
+            textBox1.Font = font;
         }
     }
 }

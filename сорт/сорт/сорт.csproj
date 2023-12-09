@@ -89,5 +89,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="text\text4.txt" />
+    <Content Include="text\text3.txt" />
+    <Content Include="text\text2.txt" />
+    <Content Include="text\text1.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
