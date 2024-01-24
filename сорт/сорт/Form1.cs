@@ -18,10 +18,13 @@ namespace сорт
     {
         public Form1()
         {
+            //Решить проблему с последним видом сортировки
             InitializeComponent();
             comboBox1.Items.AddRange(new string[] { "4", "5", "6", "7", "8", "9", "10" });
+            comboBox1.SelectedIndex = 0;
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBox2.Items.AddRange(new string[] { "сортировка пузырьком", "сортировка перемешиванием", "сортировка вставками", "сортировка подсчетом", "сортировка подсчетом 2" });
+            comboBox2.SelectedIndex = 0;
             comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             trackBar1.Minimum = 2;
             trackBar1.Maximum = 5;
@@ -74,7 +77,8 @@ namespace сорт
         public int proces = -1;
         public int and = 0;
         public int y;
-        public int selected = 0; 
+        public int selected = 0;
+        public bool stopstatus = true;
        // public int sizechengt = 0;
         public int combo1selected = 0;
         public List<int> random = new List<int>();
@@ -202,47 +206,41 @@ namespace сорт
         //Кнопка добавения элементов
         private void button1_Click(object sender, EventArgs e)
         {
-            if (selected == 1)
+
+            if (textBox1.Text.Length == 0)
             {
-                if (textBox1.Text.Length == 0)
-                {     
-                    rand(Convert.ToInt32(comboBox1.SelectedItem));
+                rand(Convert.ToInt32(comboBox1.SelectedItem));
+                newbox();
+                button2.Enabled = false;
+                comboBox2.Enabled = false;
+            }
+            else
+            {
+                string text = textBox1.Text;
+                string[] words = text.Split(new char[] { ',' });
+                int good = 0;
+                for (int i = 0; i < words.Length; i++)
+                {
+                    if (int.TryParse(words[i], out int o) == true)
+                    {
+                        good++;
+                    }
+                }
+                if (good == words.Length)
+                {
+                    for (int i = 0; i < words.Length; i++)
+                    {
+                        random.Add(Convert.ToInt32(words[i]));
+                    }
                     newbox();
                     button2.Enabled = false;
                     comboBox2.Enabled = false;
                 }
                 else
                 {
-                    string text = textBox1.Text;
-                    string[] words = text.Split(new char[] { ',' });
-                    int good = 0;
-                    for (int i = 0; i < words.Length; i++)
-                    {
-                        if (int.TryParse(words[i], out int o) == true)
-                        {
-                            good++;
-                        }
-                    }
-                    if (good == words.Length)
-                    {
-                        for (int i = 0; i < words.Length; i++)
-                        {
-                            random.Add(Convert.ToInt32(words[i]));
-                        }
-                        newbox();
-                        button2.Enabled = false;
-                        comboBox2.Enabled = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ошибка массива данных !\nВозможные причины:\n1) Указанны не верные данные.\n2) Ввод данных выполнен не правильно.\nДанные должны вводится через запятую без пробелов !\nВ конце не должно быть запятой !");
-                        return;
-                    }
+                    MessageBox.Show("Ошибка массива данных !\nВозможные причины:\n1) Указанны не верные данные.\n2) Ввод данных выполнен не правильно.\nДанные должны вводится через запятую без пробелов !\nВ конце не должно быть запятой !");
+                    return;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Ошибка ввода данных !\nНе выбран тип сортировки !");
             }
         }
         //Перемешение элементов
@@ -369,16 +367,16 @@ namespace сорт
                 }
             }
         }
-        public void fullstop()
+        public void fullstopanim()
         {
             up.Stop();
             muve.Stop();
             down.Stop();
-            timer1.Stop();
-            laft.Stop();
-            right.Stop();
-            sortinsert.Stop();
-            chaksvop.Stop();
+            //timer1.Stop();
+            //laft.Stop();
+            //right.Stop();
+            //sortinsert.Stop();
+            //chaksvop.Stop();
             elarm.Stop();
             elarm_2.Stop();
             appinsert.Stop();
@@ -398,7 +396,7 @@ namespace сорт
         {
             if (random.Count > 0)
             {
-                fullstop();
+                fullstopanim();
                 b1 = null;
                 b2 = null;
                 b3 = null;
@@ -432,6 +430,11 @@ namespace сорт
                 if(button3.Enabled == false)
                 {
                     fullcliar();
+                    timer1.Stop();
+                    laft.Stop();
+                    right.Stop();
+                    sortinsert.Stop();
+                    chaksvop.Stop();
                 }
                 proces = -1;
                 i1 = 0;
@@ -446,6 +449,7 @@ namespace сорт
                 list2.Clear();
                 list.Clear();
                 this.FormBorderStyle = FormBorderStyle.Sizable;
+                stopstatus = true;
                 button2.Enabled = true;
                 button3.Enabled = true;
                 comboBox2.Enabled = true;
@@ -513,7 +517,6 @@ namespace сорт
         {     
             if((this.Controls.Find((j - 1).ToString(), true).First() as Label).BackColor == Color.Green)
             {
-                
                 timer1.Start();
             }
             else
@@ -526,7 +529,7 @@ namespace сорт
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            if(stopstatus)
             if (count < count1 - 1)
             {
                 int temp;
@@ -572,10 +575,11 @@ namespace сорт
 
 
         }
-        //Кнопка старт
+        //Кнопка стоп
         private void button5_Click(object sender, EventArgs e)
         {
-            switch (proces)
+            stopstatus = false;
+            /*switch (proces)
             {
                 case 0: 
                     up.Stop();
@@ -623,14 +627,18 @@ namespace сорт
                     goinplase_2.Stop();
                     break;
                 default:
-                    //fullstop();
+                    
                     break;
-            }
+            }*/
+            fullstopanim();
            // MessageBox.Show(proces.ToString());
+           
         }
-        //Кнопка стоп
+        //Кнопка старт
         private void button6_Click(object sender, EventArgs e)
         {
+            stopstatus = true;
+            MessageBox.Show(proces.ToString());
             switch (proces)
             {
                 case 0:
@@ -677,9 +685,9 @@ namespace сорт
                     break;
                 case 14:
                     goinplase_2.Start();
+                    //muve.Start();
                     break;
             }
-            //MessageBox.Show(proces.ToString());
 
         }
         //Анимации движения при сортировке перемешивание и сортировки пузырьком
@@ -687,10 +695,10 @@ namespace сорт
         {
             switch (comboBox2.Text)
             {
-                case "сортировка пузырьком":
+                /*case "сортировка пузырьком":
                     b1.Top += spid;
                     b2.Top -= spid;
-                    break;
+                    break;*/
                 case "сортировка перемешиванием":
                     if (left == 0)
                     {
@@ -704,20 +712,24 @@ namespace сорт
                         b2.Top += spid;
                     }
                     break;
-                case "сортировка вставками":
+                default:
                     b1.Top += spid;
                     b2.Top -= spid;
                     break;
+                    /*case "сортировка вставками":
+                        b1.Top += spid;
+                        b2.Top -= spid;
+                        break;*/
             }
         }
         public void mup()
         {
             switch (comboBox2.Text)
             {
-                case "сортировка пузырьком":
+                /*case "сортировка пузырьком":
                     b1.Top -= spid;
                     b2.Top += spid;
-                    break;
+                    break;*/
                 case "сортировка перемешиванием":
                     if (left == 0)
                     {
@@ -731,10 +743,14 @@ namespace сорт
                         b2.Top -= spid;
                     }
                     break;
-                case "сортировка вставками":
+                default:
                     b1.Top -= spid;
                     b2.Top += spid;
                     break;
+                /*case "сортировка вставками":
+                    b1.Top -= spid;
+                    b2.Top += spid;
+                    break;*/
             }
 
         }
@@ -768,6 +784,7 @@ namespace сорт
 
         private void down_Tick(object sender, EventArgs e)
         {
+            proces = 2;
             if (right1 == 0)
             {
                 b = b1;
@@ -778,7 +795,7 @@ namespace сорт
             }
             if (b.Location.Y > ((this.Height / 2) - 100))
             {
-                proces = 2;
+                //proces = 2;
                 mdown();
             }
             else
@@ -792,19 +809,23 @@ namespace сорт
                 switch (comboBox2.Text)
                 {
                     case "сортировка пузырьком":
+                        proces = 100;
                         timer1.Start();
                         break;
                     case "сортировка перемешиванием":
                         if(left == 0)
                         {
+                            proces = 200;
                             laft.Start();
                         }   
                         if(right1 == 0)
                         {
+                            proces = 300;
                             right.Start();                       
                         }
                         break;
                     case "сортировка вставками":
+                        //proces = 401;
                         chaksvop.Start();
                         break;
                 }
@@ -866,6 +887,7 @@ namespace сорт
         
         private void laft_Tick(object sender, EventArgs e)
         {
+            if(stopstatus)
             if (count < count1 - 1)
             {
                 int temp;
@@ -911,9 +933,9 @@ namespace сорт
 
         private void right_Tick(object sender, EventArgs e)
         {
+            if(stopstatus)
             if (count > 0)
             {
-                
                 int temp;
                 if (random[i] > random[j])
                 {
@@ -958,7 +980,7 @@ namespace сорт
         //Центровка элементов
         private void Form1_Resize(object sender, EventArgs e)
         {
-            if(selected == 1 && button2.Enabled == false)
+            if(button2.Enabled == false)
             {
                 int siz = textBox1.Text.Length > 0 ? itfit(random.Count) : itfit(Convert.ToInt32(comboBox1.SelectedItem.ToString())); ;
                 for (int i = 0; i < random.Count; i++)
@@ -983,13 +1005,15 @@ namespace сорт
         public int gofor = 0;
         private void sortinsert_Tick(object sender, EventArgs e)
         {
-            if(count < count1 - 1)
+            if(stopstatus)
+            if (count < count1 - 1)
             {
                 count++;
                 chakvalue = random[count];
                 j = count;
                 sortinsert.Stop();
                 chaksvop.Start();
+                //MessageBox.Show("400");
 
             }
             else
@@ -1002,6 +1026,7 @@ namespace сорт
         public int yes = 0;
         private void chaksvop_Tick(object sender, EventArgs e)
         {
+            if(stopstatus)
             if(j > 0 && random[j - 1] > chakvalue)
             {
                 int temp = random[j];
@@ -1021,7 +1046,8 @@ namespace сорт
                     yes = 0;
                     chaksvop.Stop();
                     sortinsert.Stop();
-                    appinsert.Start();   
+                    appinsert.Start();
+                    //MessageBox.Show("401");
                 }
                 else
                 {
@@ -1108,6 +1134,7 @@ namespace сорт
                 godown.Stop();
                 list.Clear();
                 sortinsert.Start();
+                //proces = 400;
             }
         }
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
@@ -1209,16 +1236,19 @@ namespace сорт
                     switch (comboBox2.Text)
                     {
                         case "сортировка пузырьком":
+                            proces = 100;
                             timer1.Start();
                             break;
                         case "сортировка перемешиванием":
                             if(left == 0)
                             {
+                                proces = 200;
                                 laft.Start();
                                 right.Stop();
                             }
                             if(right1 == 0)
                             {
+                                proces = 300;
                                 right.Start();
                                 laft.Stop();
                             }
@@ -1384,6 +1414,7 @@ namespace сорт
         private void countsort_Tick(object sender, EventArgs e)
         {
             proces = 9;
+            //if(stopstatus)
             if (countindex[i2] > 0)
             {
                 sorted[index] = i2;
@@ -1476,7 +1507,8 @@ namespace сорт
         public int k = 0;
         private void countsort2out_Tick(object sender, EventArgs e)
         {
-            proces = 12;
+            //proces = 12;
+            if(stopstatus)
             if(count < count1)
             {
                 chak = random[count];
@@ -1629,7 +1661,7 @@ namespace сорт
 
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            selected = 1;
+            //selected = 1;
         }
 
         private void elarm_2_Tick(object sender, EventArgs e)
@@ -1663,23 +1695,20 @@ namespace сорт
         private void button7_Click(object sender, EventArgs e)
         {
             Form2 form = new Form2();
-            if(selected == 1)
+            switch (comboBox2.SelectedItem)
             {
-                switch (comboBox2.SelectedItem)
-                {
-                    case "сортировка пузырьком":
-                        form.name = "text\\text1.txt";
-                        break;
-                    case "сортировка перемешиванием":
-                        form.name = "text\\text2.txt";
-                        break;
-                    case "сортировка вставками":
-                        form.name = "text\\text3.txt";
-                        break;
-                    case "сортировка подсчетом 2":
-                        form.name = "text\\text4.txt";
-                        break;
-                }
+                case "сортировка пузырьком":
+                    form.name = "text\\text1.txt";
+                    break;
+                case "сортировка перемешиванием":
+                    form.name = "text\\text2.txt";
+                    break;
+                case "сортировка вставками":
+                    form.name = "text\\text3.txt";
+                    break;
+                case "сортировка подсчетом 2":
+                    form.name = "text\\text4.txt";
+                    break;
             }
             form.Show();
         }

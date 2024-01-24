@@ -55,3 +55,4 @@ C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт\�
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт\сорт\obj\Debug\сорт.csproj.CoreCompileInputs.cache
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт\сорт\obj\Debug\сорт.exe
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт\сорт\obj\Debug\сорт.pdb
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт\сорт\obj\Debug\сорт.Management.resources
