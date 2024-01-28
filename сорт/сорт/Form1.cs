@@ -308,12 +308,15 @@ namespace сорт
                 switch (comboBox2.SelectedItem)
                 {
                     case "сортировка пузырьком":
+                        proces = 100;
                         timer1.Start();
                         break;
                     case "сортировка перемешиванием":
+                        proces = 200;
                         laft.Start();
                         break;
                     case "сортировка вставками":
+                        proces = 400;
                         sortinsert.Start();
                         break;
                     case "сортировка подсчетом":
@@ -529,7 +532,7 @@ namespace сорт
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(stopstatus)
+            if(stopstatus && proces == 100)
             if (count < count1 - 1)
             {
                 int temp;
@@ -538,11 +541,13 @@ namespace сорт
                     muveover = 0;
                     temp = random[i];
                     set(i.ToString(), j.ToString());
+                    proces = 0;
+                    up.Start();
+                    Thread.Sleep(100);
                     b1.BackColor = Color.Green;
                     b2.BackColor = Color.Green;
                     b1x = b1.Location.X;
                     b2x = b2.Location.X;
-                    up.Start();
                     random[i] = random[j];
                     random[j] = temp;
                     i++;
@@ -579,6 +584,7 @@ namespace сорт
         private void button5_Click(object sender, EventArgs e)
         {
             stopstatus = false;
+            //MessageBox.Show(proces.ToString());
             /*switch (proces)
             {
                 case 0: 
@@ -627,18 +633,21 @@ namespace сорт
                     goinplase_2.Stop();
                     break;
                 default:
-                    
+                   
                     break;
             }*/
+            //Thread.Sleep(50);
             fullstopanim();
-           // MessageBox.Show(proces.ToString());
-           
+            //Thread.Sleep(50);
+            MessageBox.Show(proces.ToString() + stopstatus+left);
+            // MessageBox.Show(proces.ToString());
+
         }
         //Кнопка старт
         private void button6_Click(object sender, EventArgs e)
         {
             stopstatus = true;
-            MessageBox.Show(proces.ToString());
+            MessageBox.Show(proces.ToString() + stopstatus);
             switch (proces)
             {
                 case 0:
@@ -686,7 +695,16 @@ namespace сорт
                 case 14:
                     goinplase_2.Start();
                     //muve.Start();
+                   break;
+                /*case 100:
+                    //timer1.Start();
                     break;
+                case 200:
+                    laft.Start();
+                    break;
+                case 300:
+                    right.Start();
+                    break;*/
             }
 
         }
@@ -757,6 +775,7 @@ namespace сорт
         public Label b;
         private void up_Tick(object sender, EventArgs e)
         {
+            proces = 0;
             timer1.Stop();
             laft.Stop();
             right.Stop();  
@@ -795,17 +814,18 @@ namespace сорт
             }
             if (b.Location.Y > ((this.Height / 2) - 100))
             {
-                //proces = 2;
+                proces = 2;
                 mdown();
             }
             else
             {
-                down.Stop();
                 b1.BackColor = Color.Black;
                 b2.BackColor = Color.Black;
+                Thread.Sleep(50);
                 string name = b1.Name;
                 b1.Name = b2.Name;
                 b2.Name = name;
+                down.Stop();
                 switch (comboBox2.Text)
                 {
                     case "сортировка пузырьком":
@@ -829,7 +849,7 @@ namespace сорт
                         chaksvop.Start();
                         break;
                 }
-                
+                //down.Stop();
             }
 
         }
@@ -887,19 +907,22 @@ namespace сорт
         
         private void laft_Tick(object sender, EventArgs e)
         {
-            if(stopstatus)
+            if(stopstatus && proces == 200)
             if (count < count1 - 1)
             {
                 int temp;
                 if (random[i] > random[j])
                 {
                     temp = random[i];
-                    set(i.ToString(), j.ToString());
+                    set(i.ToString(), j.ToString());  
+                    proces = 0;
+                    up.Start();
+                    Thread.Sleep(100);
                     b1.BackColor = Color.Orange;
                     b2.BackColor = Color.Orange;
                     b1x = b1.Location.X;
                     b2x = b2.Location.X;
-                    up.Start();
+                    //up.Start();
                     random[i] = random[j];
                     random[j] = temp;
                     i++;
@@ -925,6 +948,7 @@ namespace сорт
                     j = random.Count - 1;
                     i = random.Count - 2;
                     laft.Stop();
+                    proces = 300;
                     right.Start();
                 }
             }
@@ -933,7 +957,7 @@ namespace сорт
 
         private void right_Tick(object sender, EventArgs e)
         {
-            if(stopstatus)
+            if(stopstatus && proces == 300)
             if (count > 0)
             {
                 int temp;
@@ -941,11 +965,14 @@ namespace сорт
                 {
                     temp = random[j];
                     set(i.ToString(), j.ToString());
+                    proces = 0;
+                    up.Start();
+                    Thread.Sleep(100);
                     b1.BackColor = Color.Blue;
                     b2.BackColor = Color.Blue;
                     b1x = b1.Location.X;
                     b2x = b2.Location.X;
-                    up.Start();
+                    //up.Start();
                     random[j] = random[i];
                     random[i] = temp;   
                     i--;
@@ -970,6 +997,7 @@ namespace сорт
                     i = 0;
                     j = 1;
                     right.Stop();
+                    proces = 200;
                     laft.Start();
                 }
                 
@@ -1005,7 +1033,7 @@ namespace сорт
         public int gofor = 0;
         private void sortinsert_Tick(object sender, EventArgs e)
         {
-            if(stopstatus)
+            if(stopstatus && proces == 400)
             if (count < count1 - 1)
             {
                 count++;
@@ -1013,7 +1041,6 @@ namespace сорт
                 j = count;
                 sortinsert.Stop();
                 chaksvop.Start();
-                //MessageBox.Show("400");
 
             }
             else
@@ -1026,7 +1053,7 @@ namespace сорт
         public int yes = 0;
         private void chaksvop_Tick(object sender, EventArgs e)
         {
-            if(stopstatus)
+            if(stopstatus && proces == 400)
             if(j > 0 && random[j - 1] > chakvalue)
             {
                 int temp = random[j];
@@ -1047,7 +1074,6 @@ namespace сорт
                     chaksvop.Stop();
                     sortinsert.Stop();
                     appinsert.Start();
-                    //MessageBox.Show("401");
                 }
                 else
                 {
@@ -1134,7 +1160,7 @@ namespace сорт
                 godown.Stop();
                 list.Clear();
                 sortinsert.Start();
-                //proces = 400;
+                proces = 400;
             }
         }
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
@@ -1254,6 +1280,7 @@ namespace сорт
                             }
                             break;
                         case "сортировка вставками":
+                            proces = 400;
                             sortinsert.Start();
                             break;
                         case "сортировка подсчетом 2":
