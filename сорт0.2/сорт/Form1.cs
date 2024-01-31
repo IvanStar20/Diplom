@@ -28,20 +28,20 @@ namespace сорт
             comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             trackBar1.Minimum = 2;
             trackBar1.Maximum = 5;
-            for (int i = 1; i < 7; i++)
+            for (int i = 2; i < 7; i++)
             {
                 (this.Controls.Find("button" + i, true).First() as Button).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
             }
-            for (int i = 1; i < 7; i++)
+            for (int i = 1; i < 5; i++)
             {
                 (this.Controls.Find("label" + i, true).First() as Label).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
             }
-            for (int i = 1; i < 3; i++)
-            {
-                (this.Controls.Find("textbox" + i, true).First() as TextBox).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            }
+            //for (int i = 2; i < 3; i++)
+            //{
+                (this.Controls.Find("textbox1", true).First() as TextBox).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
+            //}
             trackBar1.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            label7.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+            label4.Anchor = AnchorStyles.Left | AnchorStyles.Top;
             comboBox1.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
             comboBox2.Anchor = AnchorStyles.Left | AnchorStyles.Top;
             textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
@@ -49,17 +49,9 @@ namespace сорт
             kpros.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             ipros.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             label1.Text = $"Скорость анимации : {trackBar1.Value}";
-            label4.Visible = false;
-            label5.Visible = false;
-            label6.Visible = false;
-            textBox2.Visible = false;
-            button1.Visible = false;
+            button3.Enabled = false;
+            button3.Visible = false;
            
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         public Label b1;
@@ -79,6 +71,7 @@ namespace сорт
         public int y;
         public int selected = 0;
         public bool stopstatus = true;
+        public bool ProgremStatus = true;
        // public int sizechengt = 0;
         public int combo1selected = 0;
         public List<int> random = new List<int>();
@@ -142,7 +135,7 @@ namespace сорт
         //Центровка элементов
         public void incentr()
         {
-            if (textBox2.Text.Length == 0 && random.Count > 0)
+            if (random.Count > 0)
             {
                 int stap = white * 2;
                 int centr = 0;
@@ -184,6 +177,7 @@ namespace сорт
             }
             
         }
+        //Подсчет размера элементов
         public int itfit(int count)
         {
             
@@ -202,6 +196,42 @@ namespace сорт
                 box(i.ToString(), x, y, random[i].ToString(), wight, wight / 2);
             }
             incentr();
+        }
+        public void StarProgrem()
+        {
+            if (random.Count > 0)
+            {
+                count1 = random.Count;
+                spid = Convert.ToInt32(trackBar1.Value);
+                switch (comboBox2.SelectedItem)
+                {
+                    case "сортировка пузырьком":
+                        proces = 100;
+                        timer1.Start();
+                        break;
+                    case "сортировка перемешиванием":
+                        proces = 200;
+                        laft.Start();
+                        break;
+                    case "сортировка вставками":
+                        proces = 400;
+                        sortinsert.Start();
+                        break;
+                    case "сортировка подсчетом":
+                        countn();
+                        break;
+                    case "сортировка подсчетом 2":
+                        proces = 500;
+                        countn();
+                        break;
+                }
+                this.FormBorderStyle = FormBorderStyle.FixedSingle;
+                button3.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Элементы не добавленны !");
+            }
         }
         //Кнопка добавения элементов
         private void button1_Click(object sender, EventArgs e)
@@ -301,7 +331,7 @@ namespace сорт
         //Кнопка запуска
         private void button3_Click(object sender, EventArgs e)
         {
-            if (random.Count > 0)
+            /*if (random.Count > 0)
             { 
                 count1 = random.Count;
                 spid = Convert.ToInt32(trackBar1.Value);
@@ -332,7 +362,7 @@ namespace сорт
             else
             {
                 MessageBox.Show("Элементы не добавленны !");
-            }
+            }*/
         }
 
         public void fullcliar()
@@ -453,6 +483,7 @@ namespace сорт
                 list.Clear();
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 stopstatus = true;
+                ProgremStatus = true;
                 button2.Enabled = true;
                 button3.Enabled = true;
                 comboBox2.Enabled = true;
@@ -646,6 +677,11 @@ namespace сорт
         //Кнопка старт
         private void button6_Click(object sender, EventArgs e)
         {
+            if (ProgremStatus)
+            {
+                StarProgrem();
+                ProgremStatus = false;
+            }
             stopstatus = true;
             MessageBox.Show(proces.ToString() + stopstatus + timer1.Enabled);
             switch (proces)
@@ -1020,12 +1056,7 @@ namespace сорт
             }
 
         }
-        //Изменение размера
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
+        
         //Сортировка вставкой
         public int chakvalue;
         public Label moustsmol;
@@ -1284,6 +1315,7 @@ namespace сорт
                             break;
                         case "сортировка подсчетом 2":
                             countsort2in.Start();
+                            proces = 500;
                             break;
                     }
                     elarm.Stop();

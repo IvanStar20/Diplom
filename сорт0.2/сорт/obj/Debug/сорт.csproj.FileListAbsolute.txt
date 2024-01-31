@@ -56,3 +56,16 @@ C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт\�
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт\сорт\obj\Debug\сорт.exe
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт\сорт\obj\Debug\сорт.pdb
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт\сорт\obj\Debug\сорт.Management.resources
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\bin\Debug\сорт.exe.config
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\bin\Debug\сорт.exe
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\bin\Debug\сорт.pdb
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.csproj.AssemblyReference.cache
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.csproj.SuggestedBindingRedirects.cache
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.Form1.resources
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.Form2.resources
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.Management.resources
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.Properties.Resources.resources
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.csproj.GenerateResource.cache
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.csproj.CoreCompileInputs.cache
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.exe
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.pdb
