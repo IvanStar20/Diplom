@@ -116,6 +116,8 @@ namespace сорт
        
         public void finish()
         {
+            button5.Enabled = false;
+            button6.Enabled = false;
             int andsort1 = and1;
             if(andsort1 > 0)
             {
@@ -130,7 +132,9 @@ namespace сорт
             this.FormBorderStyle = FormBorderStyle.Sizable;
             proces = -1;
             finishishir = 1;
-            MessageBox.Show("End");
+            MessageBox.Show("END OF SORT");
+            button5.Enabled=true;
+            button6.Enabled=true;
         }
         //Центровка элементов
         public void incentr()
@@ -420,7 +424,7 @@ namespace сорт
             coutindex.Stop();
             startcort.Stop();
             goinplase.Stop();
-            countsort2out.Stop();
+            //countsort2out.Stop();
             countsort2in.Stop();
             goinplase_2.Stop();
         }
@@ -670,7 +674,7 @@ namespace сорт
             //Thread.Sleep(100);
             fullstopanim();
             //Thread.Sleep(50);
-            MessageBox.Show(proces.ToString() + stopstatus+left+timer1.Enabled);
+            MessageBox.Show(proces.ToString() + stopstatus+countsort2in.Enabled);
             // MessageBox.Show(proces.ToString());
 
         }
@@ -683,7 +687,7 @@ namespace сорт
                 ProgremStatus = false;
             }
             stopstatus = true;
-            MessageBox.Show(proces.ToString() + stopstatus + timer1.Enabled);
+            MessageBox.Show(proces.ToString() + stopstatus + countsort2in.Enabled);
             switch (proces)
             {
                 case 0:
@@ -1315,7 +1319,7 @@ namespace сорт
                             break;
                         case "сортировка подсчетом 2":
                             countsort2in.Start();
-                            proces = 500;
+                            proces = 13;
                             break;
                     }
                     elarm.Stop();
@@ -1567,7 +1571,7 @@ namespace сорт
         private void countsort2out_Tick(object sender, EventArgs e)
         {
             //proces = 12;
-            if(stopstatus)
+            if(stopstatus && proces == 500)
             if(count < count1)
             {
                 chak = random[count];
@@ -1576,13 +1580,14 @@ namespace сорт
                 (this.Controls.Find("ipros".ToString(), true).First() as Label).Text = $"i = {count}";
                 (this.Controls.Find("kpros".ToString(), true).First() as Label).Text = $"k = {k}";
                 countsort2in.Start();
-                countsort2out.Stop();
+                proces = 13;
+                //countsort2out.Stop();
             }
             else
             {
                 //fullstop();
                 countsort2out.Stop();
-                MessageBox.Show("End");
+                MessageBox.Show("END OF SORT");
             }
         }
         public Label b3;
@@ -1604,6 +1609,7 @@ namespace сорт
                         countsort2in.Stop();
                         elarmchak();
                         elarm.Start();
+                        proces = 11;
                     }          
                 }
                 else
@@ -1612,7 +1618,8 @@ namespace сорт
                     {
                         countsort2in.Stop();
                         elarmchak();
-                        elarm.Start();   
+                        elarm.Start();
+                        proces = 11;
                     }
                 }
                 counttwo++;
@@ -1649,6 +1656,7 @@ namespace сорт
                 top = 0;
                 //pic1.Location = new Point((this.Controls.Find(count.ToString(), true).First() as Label).Location.X, y - size);
                 countsort2out.Start();
+                proces = 500;
             }
             else
             {
