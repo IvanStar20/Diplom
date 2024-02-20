@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,12 +22,12 @@ namespace сорт
             comboBox1.Items.AddRange(new string[] { "4", "5", "6", "7", "8", "9", "10" });
             comboBox1.SelectedIndex = 0;
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBox2.Items.AddRange(new string[] { "сортировка пузырьком", "сортировка перемешиванием", "сортировка вставками", "сортировка подсчетом", "сортировка подсчетом 2" });
+            comboBox2.Items.AddRange(new string[] { "сортировка пузырьком", "сортировка перемешиванием", "сортировка вставками", /*"сортировка подсчетом"*/"сортировка подсчетом 2" });
             comboBox2.SelectedIndex = 0;
             comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             trackBar1.Minimum = 2;
             trackBar1.Maximum = 5;
-            for (int i = 2; i < 7; i++)
+            for (int i = 1; i < 7; i++)
             {
                 (this.Controls.Find("button" + i, true).First() as Button).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
             }
@@ -51,7 +50,7 @@ namespace сорт
             label1.Text = $"Скорость анимации : {trackBar1.Value}";
             button3.Enabled = false;
             button3.Visible = false;
-           
+
         }
 
         public Label b1;
@@ -72,11 +71,11 @@ namespace сорт
         public int selected = 0;
         public bool stopstatus = true;
         public bool ProgremStatus = true;
-       // public int sizechengt = 0;
+        // public int sizechengt = 0;
         public int combo1selected = 0;
         public List<int> random = new List<int>();
         //Пораметры элемента
-        public void box(string gatname, int gatx, int gaty, string gattext, int wight,int textsize)
+        public void box(string gatname, int gatx, int gaty, string gattext, int wight, int textsize)
         {
             int x = gatx;
             int y = gaty;
@@ -113,28 +112,28 @@ namespace сорт
         }
         //Последний этап сортировки
         public int finishishir = 0;
-       
+
         public void finish()
         {
             button5.Enabled = false;
             button6.Enabled = false;
             int andsort1 = and1;
-            if(andsort1 > 0)
+            if (andsort1 > 0 && comboBox2.SelectedItem.ToString() != "сортировка вставками")
             {
                 elarm_2.Interval = 2000;
                 elarm2chek();
                 elarm_2.Start();
             }
-            if(comboBox2.SelectedItem.ToString() == "сортировка вставками")
+            if (comboBox2.SelectedItem.ToString() == "сортировка вставками")
             {
                 (this.Controls.Find(0.ToString(), true).First() as Label).BackColor = Color.Green;
-            } 
+            }
             this.FormBorderStyle = FormBorderStyle.Sizable;
             proces = -1;
             finishishir = 1;
             MessageBox.Show("END OF SORT");
-            button5.Enabled=true;
-            button6.Enabled=true;
+            button5.Enabled = true;
+            button6.Enabled = true;
         }
         //Центровка элементов
         public void incentr()
@@ -143,7 +142,7 @@ namespace сорт
             {
                 int stap = white * 2;
                 int centr = 0;
-                y = (this.Height / 2) - 100;
+                y = (this.Height / 2) - white;
                 if (random.Count % 2 == 0)
                 {
                     centr = (this.Width / 2) + (white / 2);
@@ -179,16 +178,16 @@ namespace сорт
                     }
                 }
             }
-            
+
         }
         //Подсчет размера элементов
         public int itfit(int count)
         {
-            
+
             int size1 = (this.Width) / (count * 2) <= 100 ? (this.Width) / (count * 2) : 100;
             white = size1;
             return white;
-            
+
         }
         //Новый элемент
         public void newbox()
@@ -203,39 +202,34 @@ namespace сорт
         }
         public void StarProgrem()
         {
-            if (random.Count > 0)
+
+            count1 = random.Count;
+            spid = Convert.ToInt32(trackBar1.Value);
+            switch (comboBox2.SelectedItem)
             {
-                count1 = random.Count;
-                spid = Convert.ToInt32(trackBar1.Value);
-                switch (comboBox2.SelectedItem)
-                {
-                    case "сортировка пузырьком":
-                        proces = 100;
-                        timer1.Start();
-                        break;
-                    case "сортировка перемешиванием":
-                        proces = 200;
-                        laft.Start();
-                        break;
-                    case "сортировка вставками":
-                        proces = 400;
-                        sortinsert.Start();
-                        break;
-                    case "сортировка подсчетом":
-                        countn();
-                        break;
-                    case "сортировка подсчетом 2":
-                        proces = 500;
-                        countn();
-                        break;
-                }
-                this.FormBorderStyle = FormBorderStyle.FixedSingle;
-                button3.Enabled = false;
+                case "сортировка пузырьком":
+                    proces = 100;
+                    timer1.Start();
+                    break;
+                case "сортировка перемешиванием":
+                    proces = 200;
+                    laft.Start();
+                    break;
+                case "сортировка вставками":
+                    proces = 400;
+                    sortinsert.Start();
+                    break;
+                case "сортировка подсчетом":
+                    countn();
+                    break;
+                case "сортировка подсчетом 2":
+                    proces = 500;
+                    countn();
+                    break;
             }
-            else
-            {
-                MessageBox.Show("Элементы не добавленны !");
-            }
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            button3.Enabled = false;
+
         }
         //Кнопка добавения элементов
         private void button1_Click(object sender, EventArgs e)
@@ -300,7 +294,7 @@ namespace сорт
                     {
                         if (b3.Location.X > b2.Location.X)
                         {
-                            b3.Left -= spid;                           
+                            b3.Left -= spid;
                         }
                         else
                         {
@@ -335,38 +329,7 @@ namespace сорт
         //Кнопка запуска
         private void button3_Click(object sender, EventArgs e)
         {
-            /*if (random.Count > 0)
-            { 
-                count1 = random.Count;
-                spid = Convert.ToInt32(trackBar1.Value);
-                switch (comboBox2.SelectedItem)
-                {
-                    case "сортировка пузырьком":
-                        proces = 100;
-                        timer1.Start();
-                        break;
-                    case "сортировка перемешиванием":
-                        proces = 200;
-                        laft.Start();
-                        break;
-                    case "сортировка вставками":
-                        proces = 400;
-                        sortinsert.Start();
-                        break;
-                    case "сортировка подсчетом":
-                        countn();
-                        break;
-                    case "сортировка подсчетом 2":
-                        countn();
-                        break;
-                }
-                this.FormBorderStyle = FormBorderStyle.FixedSingle;
-                button3.Enabled = false;
-            }
-            else
-            {
-                MessageBox.Show("Элементы не добавленны !");
-            }*/
+            
         }
 
         public void fullcliar()
@@ -464,7 +427,7 @@ namespace сорт
                 {
                     (this.Controls.Find(i.ToString(), true).First() as Label).Dispose();
                 }
-                if(button3.Enabled == false)
+                if (button3.Enabled == false)
                 {
                     fullcliar();
                     timer1.Stop();
@@ -507,7 +470,7 @@ namespace сорт
                     and++;
                 }
             }
-            if(and == random.Count - 1)
+            if (and == random.Count - 1)
             {
                 switch (comboBox2.SelectedItem)
                 {
@@ -526,7 +489,7 @@ namespace сорт
             }
         }
         //Смена элементов
-        public void set( string i , string j)
+        public void set(string i, string j)
         {
             b1 = (this.Controls.Find(i, true).First() as Label);
             b2 = (this.Controls.Find(j, true).First() as Label);
@@ -539,7 +502,7 @@ namespace сорт
         {
             hod++;
             and1 = count1 - hod;
-            if(count1 > hod - 1 && notsvop != 0)
+            if (count1 > hod - 1 && notsvop != 0)
             {
                 (this.Controls.Find(and1.ToString(), true).First() as Label).BackColor = Color.Green;
             }
@@ -551,136 +514,79 @@ namespace сорт
             stop();
 
         }
-        public void dontgo()
-        {     
-            if((this.Controls.Find((j - 1).ToString(), true).First() as Label).BackColor == Color.Green)
-            {
-                timer1.Start();
-            }
-            else
-            {
-                timer1.Stop();
-                elarmchak();
-                elarm.Start();
-            }
-
-        }
+        
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(stopstatus && proces == 100)
-            if (count < count1 - 1)
-            {
-                int temp;
-                if (random[i] > random[j])
+            if (stopstatus && proces == 100)
+                if (count < count1 - (hod + 1))
                 {
-                    muveover = 0;
-                    temp = random[i];
-                    set(i.ToString(), j.ToString());
-                    proces = 0;
-                    up.Start();
-                    Thread.Sleep(100);
-                    b1.BackColor = Color.Green;
-                    b2.BackColor = Color.Green;
-                    b1x = b1.Location.X;
-                    b2x = b2.Location.X;
-                    random[i] = random[j];
-                    random[j] = temp;
-                    i++;
-                    j++;
-                    count++;
-                    notsvop = 1;
+                    int temp;
+                    if (random[i] > random[j])
+                    {
+                        muveover = 0;
+                        temp = random[i];
+                        set(i.ToString(), j.ToString());
+                        proces = 0;
+                        up.Start();
+                        Thread.Sleep(100);
+                        b1.BackColor = Color.Green;
+                        b2.BackColor = Color.Green;
+                        b1x = b1.Location.X;
+                        b2x = b2.Location.X;
+                        random[i] = random[j];
+                        random[j] = temp;
+                        i++;
+                        j++;
+                        count++;
+                        notsvop = 1;
 
+                    }
+                    else
+                    {
+
+                        i++;
+                        j++;
+                        count++;
+                        timer1.Stop();
+                        elarmchak();
+                        elarm.Start();
+                    }
                 }
                 else
                 {
-                    
-                    i++;
-                    j++;
-                    count++;
-                    dontgo();
-                }
-            }
-            else
-            {
-                atand();
-                if (and == 0)
-                {
-                    i = 0;
-                    j = 1;
-                    count = 0;
-                    timer1.Start();
-                }
+                    atand();
+                    if (and == 0)
+                    {
+                        i = 0;
+                        j = 1;
+                        count = 0;
+                        timer1.Start();
+                    }
 
-            }
+                }
 
 
         }
         //Кнопка стоп
         private void button5_Click(object sender, EventArgs e)
         {
-            stopstatus = false;
-            //MessageBox.Show(proces.ToString());
-            /*switch (proces)
+            if (random.Count == 0)
             {
-                case 0: 
-                    up.Stop();
-                    break;
-                case 1:
-                    muve.Stop();     
-                    break;
-                case 2:
-                    down.Stop();
-                    break;
-                case 3:
-                    appinsert.Stop();
-                    break;
-                case 4:
-                    goforword.Stop();
-                    break;
-                case 5:
-                    gotostart.Stop();
-                    break;
-                case 6:
-                    godown.Stop();
-                    break;
-                case 7:
-                    coutindex.Stop();
-                    break;
-                case 8:
-                    startcort.Stop();
-                    break;
-                case 9:
-                    countsort.Stop();
-                    break;
-                case 10:
-                    goinplase.Stop();
-                    break;
-                case 11:
-                    elarm.Stop();
-                    break;
-                case 12:
-                    countsort2out.Stop();
-                    break;
-                case 13:
-                    countsort2in.Stop();
-                    break;
-                case 14:
-                    goinplase_2.Stop();
-                    break;
-                default:
-                   
-                    break;
-            }*/
-            //Thread.Sleep(100);
+                MessageBox.Show("Элементы не добавленны !");
+                return;
+            }
+            stopstatus = false;
             fullstopanim();
-            //Thread.Sleep(50);
-            MessageBox.Show(proces.ToString() + stopstatus+countsort2in.Enabled);
-            // MessageBox.Show(proces.ToString());
-
+            MessageBox.Show(proces.ToString() + stopstatus + countsort2in.Enabled);
         }
         //Кнопка старт
         private void button6_Click(object sender, EventArgs e)
         {
+            if(random.Count == 0)
+            {
+                MessageBox.Show("Элементы не добавленны !");
+                return;
+            }
             if (ProgremStatus)
             {
                 StarProgrem();
@@ -694,7 +600,7 @@ namespace сорт
                     up.Start();
                     break;
                 case 1:
-                    muve.Start();    
+                    muve.Start();
                     break;
                 case 2:
                     down.Start();
@@ -734,10 +640,9 @@ namespace сорт
                     break;
                 case 14:
                     goinplase_2.Start();
-                    //muve.Start();
-                   break;
+                    break;
                 /*case 100:
-                    //timer1.Start();
+                    timer1.Start();
                     break;
                 case 200:
                     laft.Start();
@@ -753,10 +658,6 @@ namespace сорт
         {
             switch (comboBox2.Text)
             {
-                /*case "сортировка пузырьком":
-                    b1.Top += spid;
-                    b2.Top -= spid;
-                    break;*/
                 case "сортировка перемешиванием":
                     if (left == 0)
                     {
@@ -774,20 +675,12 @@ namespace сорт
                     b1.Top += spid;
                     b2.Top -= spid;
                     break;
-                    /*case "сортировка вставками":
-                        b1.Top += spid;
-                        b2.Top -= spid;
-                        break;*/
             }
         }
         public void mup()
         {
             switch (comboBox2.Text)
             {
-                /*case "сортировка пузырьком":
-                    b1.Top -= spid;
-                    b2.Top += spid;
-                    break;*/
                 case "сортировка перемешиванием":
                     if (left == 0)
                     {
@@ -805,10 +698,6 @@ namespace сорт
                     b1.Top -= spid;
                     b2.Top += spid;
                     break;
-                /*case "сортировка вставками":
-                    b1.Top -= spid;
-                    b2.Top += spid;
-                    break;*/
             }
 
         }
@@ -818,9 +707,9 @@ namespace сорт
             proces = 0;
             timer1.Stop();
             laft.Stop();
-            right.Stop();  
+            right.Stop();
             chaksvop.Stop();
-            if(right1 == 0)
+            if (right1 == 0)
             {
                 b = b2;
             }
@@ -828,7 +717,7 @@ namespace сорт
             {
                 b = b1;
             }
-            if (b.Location.Y > ((this.Height / 2) - 100) - white)
+            if (b.Location.Y > (y - white))
             {
                 proces = 0;
                 mup();
@@ -838,7 +727,7 @@ namespace сорт
                 up.Stop();
                 muve.Start();
             }
-            
+
         }
 
         private void down_Tick(object sender, EventArgs e)
@@ -852,7 +741,7 @@ namespace сорт
             {
                 b = b2;
             }
-            if (b.Location.Y > ((this.Height / 2) - 100))
+            if (b.Location.Y > y)
             {
                 proces = 2;
                 mdown();
@@ -873,15 +762,15 @@ namespace сорт
                         timer1.Start();
                         break;
                     case "сортировка перемешиванием":
-                        if(left == 0)
+                        if (left == 0)
                         {
                             proces = 200;
                             laft.Start();
-                        }   
-                        if(right1 == 0)
+                        }
+                        if (right1 == 0)
                         {
                             proces = 300;
-                            right.Start();                       
+                            right.Start();
                         }
                         break;
                     case "сортировка вставками":
@@ -889,7 +778,7 @@ namespace сорт
                         chaksvop.Start();
                         break;
                 }
-                //down.Stop();
+
             }
 
         }
@@ -903,7 +792,7 @@ namespace сорт
         public int right1 = 1;
         public int hod2 = 0;
         public void atandshaklaft()
-        {  
+        {
             hod++;
             and1 = count1 - hod;
             if (count1 > hod - 1)
@@ -917,150 +806,130 @@ namespace сорт
         public void atandshakright()
         {
             int and = hod2;
-            (this.Controls.Find(and.ToString(), true).First() as Label).BackColor = Color.Green; 
+            (this.Controls.Find(and.ToString(), true).First() as Label).BackColor = Color.Green;
             hod2++;
             right.Stop();
             stop();
         }
-        /*public void dontgoleft()
-        {
-            if ((this.Controls.Find((i).ToString(), true).First() as Label).BackColor == Color.Black)
-            {
-
-                laft.Stop();
-                elarmchak();
-                elarm.Start();
-            }
-            
-        }
-        public void dontgoright()
-        {
-            if ((this.Controls.Find((j).ToString(), true).First() as Label).BackColor == Color.Black)
-            {
-
-                right.Stop();
-                elarmchak();
-                elarm.Start();
-            }
-           
-        }*/
         
         private void laft_Tick(object sender, EventArgs e)
         {
-            if(stopstatus && proces == 200)
-            if (count < count1 - 1)
-            {
-                int temp;
-                if (random[i] > random[j])
+            if (stopstatus && proces == 200)
+                if (count < count1 - (hod + 1))
                 {
-                    temp = random[i];
-                    set(i.ToString(), j.ToString());  
-                    proces = 0;
-                    up.Start();
-                    Thread.Sleep(100);
-                    b1.BackColor = Color.Orange;
-                    b2.BackColor = Color.Orange;
-                    b1x = b1.Location.X;
-                    b2x = b2.Location.X;
-                    //up.Start();
-                    random[i] = random[j];
-                    random[j] = temp;
-                    i++;
-                    j++;
-                    count++;
-                                       
+                    int temp;
+                    if (random[i] > random[j])
+                    {
+                        temp = random[i];
+                        set(i.ToString(), j.ToString());
+                        proces = 0;
+                        up.Start();
+                        Thread.Sleep(100);
+                        b1.BackColor = Color.Orange;
+                        b2.BackColor = Color.Orange;
+                        b1x = b1.Location.X;
+                        b2x = b2.Location.X;
+                        random[i] = random[j];
+                        random[j] = temp;
+                        i++;
+                        j++;
+                        count++;
+
+                    }
+                    else
+                    {
+                        laft.Stop();
+                        elarmchak();
+                        elarm.Start();
+                        i++;
+                        j++;
+                        count++;
+                    }
                 }
                 else
                 {
-                    //dontgoleft();
-                    i++;
-                    j++;
-                    count++;
+                    atandshaklaft();
+                    if (and == 0)
+                    {
+                        left = 1;
+                        right1 = 0;
+                        j = random.Count - (hod + 1);
+                        i = random.Count - (hod + 2);
+                        laft.Stop();
+                        proces = 300;
+                        right.Start();
+                    }
                 }
-            }
-            else
-            {
-                atandshaklaft();
-                if (and == 0)
-                {
-                    left = 1;
-                    right1 = 0;
-                    j = random.Count - 1;
-                    i = random.Count - 2;
-                    laft.Stop();
-                    proces = 300;
-                    right.Start();
-                }
-            }
 
         }
 
         private void right_Tick(object sender, EventArgs e)
         {
-            if(stopstatus && proces == 300)
-            if (count > 0)
-            {
-                int temp;
-                if (random[i] > random[j])
+            if (stopstatus && proces == 300)
+                if (count > hod)
                 {
-                    temp = random[j];
-                    set(i.ToString(), j.ToString());
-                    proces = 0;
-                    up.Start();
-                    Thread.Sleep(100);
-                    b1.BackColor = Color.Blue;
-                    b2.BackColor = Color.Blue;
-                    b1x = b1.Location.X;
-                    b2x = b2.Location.X;
-                    //up.Start();
-                    random[j] = random[i];
-                    random[i] = temp;   
-                    i--;
-                    j--;
-                    count--;                                       
+                    int temp;
+                    if (random[i] > random[j])
+                    {
+                        temp = random[j];
+                        set(i.ToString(), j.ToString());
+                        proces = 0;
+                        up.Start();
+                        Thread.Sleep(100);
+                        b1.BackColor = Color.Blue;
+                        b2.BackColor = Color.Blue;
+                        b1x = b1.Location.X;
+                        b2x = b2.Location.X;
+                        random[j] = random[i];
+                        random[i] = temp;
+                        i--;
+                        j--;
+                        count--;
+                    }
+                    else
+                    {
+                        right.Stop();
+                        elarmchak();
+                        elarm.Start();
+                        i--;
+                        j--;
+                        count--;
+                    }
                 }
                 else
                 {
-                    //dontgoright();
-                    i--;
-                    j--;
-                    count--;
+                    atandshakright();
+                    if (and == 0)
+                    {
+                        right1 = 1;
+                        left = 0;
+                        i = hod2;
+                        j = hod2 + 1;
+                        right.Stop();
+                        proces = 200;
+                        laft.Start();
+                    }
+
                 }
-            }
-            else
-            {
-                atandshakright();
-                if (and == 0)
-                {
-                    right1 = 1;
-                    left = 0;
-                    i = 0;
-                    j = 1;
-                    right.Stop();
-                    proces = 200;
-                    laft.Start();
-                }
-                
-            }
 
         }
         public int it = 0;
         //Центровка элементов
         private void Form1_Resize(object sender, EventArgs e)
         {
-            if(button2.Enabled == false)
+            if (button2.Enabled == false)
             {
                 int siz = textBox1.Text.Length > 0 ? itfit(random.Count) : itfit(Convert.ToInt32(comboBox1.SelectedItem.ToString())); ;
                 for (int i = 0; i < random.Count; i++)
                 {
                     (this.Controls.Find(i.ToString(), true).First() as Label).Size = new Size(siz, siz);
-                    (this.Controls.Find(i.ToString(), true).First() as Label).Font = new Font("Calibri", siz/2);
+                    (this.Controls.Find(i.ToString(), true).First() as Label).Font = new Font("Calibri", siz / 2);
                 }
                 incentr();
             }
 
         }
-        
+
         //Сортировка вставкой
         public int chakvalue;
         public Label moustsmol;
@@ -1068,63 +937,63 @@ namespace сорт
         public int gofor = 0;
         private void sortinsert_Tick(object sender, EventArgs e)
         {
-            if(stopstatus && proces == 400)
-            if (count < count1 - 1)
-            {
-                count++;
-                chakvalue = random[count];
-                j = count;
-                sortinsert.Stop();
-                chaksvop.Start();
+            if (stopstatus && proces == 400)
+                if (count < count1 - 1)
+                {
+                    count++;
+                    chakvalue = random[count];
+                    j = count;
+                    sortinsert.Stop();
+                    chaksvop.Start();
 
-            }
-            else
-            {
-                sortinsert.Stop();
-                chaksvop.Stop();
-                finish();
-            }
+                }
+                else
+                {
+                    sortinsert.Stop();
+                    chaksvop.Stop();
+                    finish();
+                }
         }
         public int yes = 0;
         private void chaksvop_Tick(object sender, EventArgs e)
         {
-            if(stopstatus && proces == 400)
-            if(j > 0 && random[j - 1] > chakvalue)
-            {
-                int temp = random[j];
-                list.Add(j - 1);
-                moustsmol = (this.Controls.Find(count.ToString(), true).First() as Label);  
-                random[j] = random[j - 1];
-                random[j - 1] = temp;
-                j -= 1;
-                yes += 1;
-                
-            }
-            else
-            {
-                
-                if(yes > 0)
+            if (stopstatus && proces == 400)
+                if (j > 0 && random[j - 1] > chakvalue)
                 {
-                    yes = 0;
-                    chaksvop.Stop();
-                    sortinsert.Stop();
-                    appinsert.Start();
+                    int temp = random[j];
+                    list.Add(j - 1);
+                    moustsmol = (this.Controls.Find(count.ToString(), true).First() as Label);
+                    random[j] = random[j - 1];
+                    random[j - 1] = temp;
+                    j -= 1;
+                    yes += 1;
+
                 }
                 else
                 {
-                    chaksvop.Stop();
-                    random[j] = chakvalue;
-                    elarmchak();
-                    elarm.Start();
-                    //sortinsert.Start();
+
+                    if (yes > 0)
+                    {
+                        yes = 0;
+                        chaksvop.Stop();
+                        sortinsert.Stop();
+                        appinsert.Start();
+                    }
+                    else
+                    {
+                        chaksvop.Stop();
+                        random[j] = chakvalue;
+                        elarmchak();
+                        elarm.Start();
+                        //sortinsert.Start();
+                    }
+
                 }
-               
-            }
         }
         private void appinsert_Tick(object sender, EventArgs e)
         {
             proces = 3;
-            if(moustsmol.Location.Y > ((this.Height / 2) - 100) - white * 2)
+            if (moustsmol.Location.Y > (y - white * 2))
             {
                 moustsmol.Top -= spid;
             }
@@ -1139,20 +1008,18 @@ namespace сорт
         private void goforword_Tick(object sender, EventArgs e)
         {
             proces = 4;
-            if ((this.Controls.Find(list[gofor].ToString() , true).First() as Label).Location.X < (this.Controls.Find((list[gofor] + 1).ToString(), true).First() as Label).Location.X - interval)
+            if ((this.Controls.Find(list[gofor].ToString(), true).First() as Label).Location.X < (this.Controls.Find((list[gofor] + 1).ToString(), true).First() as Label).Location.X - interval)
             {
                 (this.Controls.Find(list[gofor].ToString(), true).First() as Label).Left += spid;
-                (this.Controls.Find(list[gofor].ToString(), true).First() as Label).BackColor  = Color.Green;
+                (this.Controls.Find(list[gofor].ToString(), true).First() as Label).BackColor = Color.Green;
 
             }
             else
             {
-                
-                gofor++;  
+
+                gofor++;
                 interval = white * 2;
-                //goforword.Stop();
-                //goforword.Start();
-                if(gofor == list.Count)
+                if (gofor == list.Count)
                 {
 
                     goforword.Stop();
@@ -1168,7 +1035,7 @@ namespace сорт
                 moustsmol.Left -= spid;
             }
             else
-            {      
+            {
                 gotostart.Stop();
                 godown.Start();
             }
@@ -1176,7 +1043,7 @@ namespace сорт
         private void godown_Tick(object sender, EventArgs e)
         {
             proces = 6;
-            if (moustsmol.Location.Y < ((this.Height / 2) - 100))
+            if (moustsmol.Location.Y < y)
             {
                 moustsmol.Top += spid;
             }
@@ -1202,10 +1069,10 @@ namespace сорт
         {
             //combo1selected = 1;
         }
-        
+
         //Анимация подцветки элементов
         public int stop1 = 0;
-        public int greeni , greenj = 0;
+        public int greeni, greenj = 0;
         public int start = 0;
         public int i1, j1 = 0;
         public Color color;
@@ -1245,7 +1112,7 @@ namespace сорт
             proces = 11;
             if (finishishir < 1)
             {
-                
+
                 if ((this.Controls.Find((i1).ToString(), true).First() as Label).BackColor == System.Drawing.Color.Green)
                 {
                     greeni = 1;
@@ -1300,16 +1167,16 @@ namespace сорт
                             proces = 100;
                             break;
                         case "сортировка перемешиванием":
-                            if(left == 0)
+                            if (left == 0)
                             {
                                 laft.Start();
                                 right.Stop();
                                 proces = 200;
                             }
-                            if(right1 == 0)
+                            if (right1 == 0)
                             {
                                 right.Start();
-                                laft.Stop(); 
+                                laft.Stop();
                                 proces = 300;
                             }
                             break;
@@ -1330,7 +1197,7 @@ namespace сорт
         }
 
         //Сортировка подсчетам
-        public Label addlabel(string gatname, int gatx, int gaty, string gattext, int wight, int textsize , int box)
+        public Label addlabel(string gatname, int gatx, int gaty, string gattext, int wight, int textsize, int box)
         {
             int x = gatx;
             int y = gaty;
@@ -1339,7 +1206,7 @@ namespace сорт
             picture.Text = gattext;
             picture.Font = new Font("Calibri", textsize);
             picture.Padding = new Padding(5);
-            if(box == 1)
+            if (box == 1)
             {
                 switch (comboBox2.SelectedItem.ToString())
                 {
@@ -1376,7 +1243,7 @@ namespace сорт
             {
                 countindex[random[i]]++;
                 x = (this.Controls.Find(i.ToString(), true).First() as Label).Location.X;
-                (this.Controls.Find(i.ToString(), true).First() as Label).Location = new Point(x, white + (white / 2));
+                (this.Controls.Find(i.ToString(), true).First() as Label).Location = new Point(x, y - white - white / 4);
             }
             for (int i = 0; i < max + 1; i++)
             {
@@ -1385,12 +1252,10 @@ namespace сорт
                     list2.Add(i.ToString());
                 }
             }
-            int xs = x;
             switch (comboBox2.SelectedItem)
             {
 
                 case "сортировка подсчетом":
-                    y = white * 4;
                     for (int i = 0; i < list2.Count; i++)
                     {
                         x = (this.Controls.Find(i.ToString(), true).First() as Label).Location.X;
@@ -1401,16 +1266,15 @@ namespace сорт
                     coutindex.Start();
                     break;
                 case "сортировка подсчетом 2":
-                    y = white * 4;
                     for (int i = 0; i < random.Count; i++)
                     {
                         x = (this.Controls.Find(i.ToString(), true).First() as Label).Location.X;
-                        box("0" + i.ToString(), x, y, 0.ToString(), white, white / 2);
-                        addlabel("l" + i.ToString(), x, y + (white - white/4), i.ToString(), white, white / 2, 0);
+                        box("0" + i.ToString(), x, y + white + white / 4, 0.ToString(), white, white / 2);
+                        addlabel("l" + i.ToString(), x, y + white * 2, i.ToString(), white, white / 2, 0);
                     }
                     (this.Controls.Find("ipros".ToString(), true).First() as Label).Visible = true;
                     (this.Controls.Find("kpros".ToString(), true).First() as Label).Visible = true;
-                    strelca(white);
+                    strelca(white - white / 4);
                     img();
                     pic1.Location = new Point(0, -500);
                     countsort2out.Start();
@@ -1428,7 +1292,7 @@ namespace сорт
         private void coutindex_Tick(object sender, EventArgs e)
         {
             proces = 7;
-            if(muv == random.Count)
+            if (muv == random.Count)
             {
                 coutindex.Stop();
                 x = 2;
@@ -1440,9 +1304,9 @@ namespace сорт
                 sorted = new int[random.Count];
                 countsort.Start();
             }
-            if(x == 0)
+            if (x == 0)
             {
-                (this.Controls.Find(muv.ToString() , true).First() as Label).BackColor = Color.Red;
+                (this.Controls.Find(muv.ToString(), true).First() as Label).BackColor = Color.Red;
                 int index = Convert.ToInt32((this.Controls.Find(muv.ToString(), true).First() as Label).Text);
                 (this.Controls.Find(("0" + index).ToString(), true).First() as Label).BackColor = Color.Red;
                 countindex[random[muv]]++;
@@ -1458,20 +1322,20 @@ namespace сорт
                 x = 0;
             }
             muv++;
-            
+
         }
         public int c = 0;
         private void startcort_Tick(object sender, EventArgs e)
         {
             proces = 8;
-            if(i2 < countindex.Length)
+            if (i2 < countindex.Length)
             {
                 i2++;
                 countsort.Start();
                 startcort.Stop();
-                      
+
             }
-            
+
         }
 
         private void countsort_Tick(object sender, EventArgs e)
@@ -1483,9 +1347,9 @@ namespace сорт
                 sorted[index] = i2;
                 int x = (this.Controls.Find("0" + i2.ToString(), true).First() as Label).Location.X;
                 b2 = (this.Controls.Find(index.ToString(), true).First() as Label);
-                b1 = addlabel("b" + i2.ToString(), x, y, i2.ToString(), white , white / 2 , 1 );
+                b1 = addlabel("b" + i2.ToString(), x, y, i2.ToString(), white, white / 2, 1);
                 index++;
-                countindex[i2]--;   
+                countindex[i2]--;
                 (this.Controls.Find("l" + i2.ToString(), true).First() as Label).Text = countindex[i2].ToString();
                 (this.Controls.Find(("0" + i2).ToString(), true).First() as Label).BackColor = Color.Red;
                 goinplase.Start();
@@ -1552,7 +1416,7 @@ namespace сорт
                 case "сортировка подсчетом 2":
                     if (top == 3 && b3.Location.Y < b2.Location.Y)
                     {
-                        b3.Top += spid;    
+                        b3.Top += spid;
                     }
                     else
                     {
@@ -1562,7 +1426,7 @@ namespace сорт
                     }
                     break;
             }
-           
+
         }
         //Сортировка подсчетом 2
         public int chak = 0;
@@ -1571,24 +1435,24 @@ namespace сорт
         private void countsort2out_Tick(object sender, EventArgs e)
         {
             //proces = 12;
-            if(stopstatus && proces == 500)
-            if(count < count1)
-            {
-                chak = random[count];
-                //(this.Controls.Find("t".ToString(), true).First() as Label).Text = $"chak = {chak}";
-                pic1.Location = new Point((this.Controls.Find(count.ToString(), true).First() as Label).Location.X, (white / 2));
-                (this.Controls.Find("ipros".ToString(), true).First() as Label).Text = $"i = {count}";
-                (this.Controls.Find("kpros".ToString(), true).First() as Label).Text = $"k = {k}";
-                countsort2in.Start();
-                proces = 13;
-                //countsort2out.Stop();
-            }
-            else
-            {
-                //fullstop();
-                countsort2out.Stop();
-                MessageBox.Show("END OF SORT");
-            }
+            if (stopstatus && proces == 500)
+                if (count < count1)
+                {
+                    chak = random[count];
+                    //(this.Controls.Find("t".ToString(), true).First() as Label).Text = $"chak = {chak}";
+                    pic1.Location = new Point((this.Controls.Find(count.ToString(), true).First() as Label).Location.X + white / 8, y - white * 2);
+                    (this.Controls.Find("ipros".ToString(), true).First() as Label).Text = $"i = {count}";
+                    (this.Controls.Find("kpros".ToString(), true).First() as Label).Text = $"k = {k}";
+                    countsort2in.Start();
+                    proces = 13;
+                    //countsort2out.Stop();
+                }
+                else
+                {
+                    //fullstop();
+                    countsort2out.Stop();
+                    MessageBox.Show("END OF SORT");
+                }
         }
         public Label b3;
         public int green = 0;
@@ -1600,7 +1464,7 @@ namespace сорт
 
                 if ((chak > random[counttwo]) || ((chak == random[counttwo]) && (counttwo < count)))
                 {
- 
+
                     k++;
                     (this.Controls.Find("kpros".ToString(), true).First() as Label).Text = $"k = {k}";
                     if (counttwo < count1)
@@ -1610,7 +1474,7 @@ namespace сорт
                         elarmchak();
                         elarm.Start();
                         proces = 11;
-                    }          
+                    }
                 }
                 else
                 {
@@ -1636,7 +1500,7 @@ namespace сорт
                 int y = b2.Location.Y;
                 b3.BringToFront();
                 goinplase_2.Start();
-                
+
             }
         }
         public int top = 0;
@@ -1660,7 +1524,7 @@ namespace сорт
             }
             else
             {
-                if (top == 0 && b3.Location.Y < b2.Location.Y - (b2.Width + (b2.Width/4)))
+                if (top == 0 && b3.Location.Y < b2.Location.Y - (b2.Width + (b2.Width / 4)))
                 {
                     b3.Top += spid;
                 }
@@ -1691,7 +1555,7 @@ namespace сорт
             pic.BackColor = Color.Transparent;
             pic.Name = "strelka";
             this.Controls.Add(pic);
-            pic1 = pic;    
+            pic1 = pic;
         }
         public void img()
         {
@@ -1704,10 +1568,10 @@ namespace сорт
             }
             pic1.Image = bmp;
         }
-      
+
         public int startof;
         public int andof;
-        public int blink;
+        public int blink = 12;
         public void elarm2chek()
         {
             elarm_2.Interval = 200;
@@ -1716,12 +1580,12 @@ namespace сорт
                 case "сортировка пузырьком":
                     startof = 0;
                     andof = and1;
-                    blink = 12;
+                    //blink = 12;
                     break;
                 case "сортировка перемешиванием":
                     startof = hod2;
                     andof = and1;
-                    blink = 13;
+                    //blink = 12;
                     break;
             }
         }
@@ -1729,6 +1593,11 @@ namespace сорт
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
         {
             //selected = 1;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            button4_Click(sender, e);
         }
 
         private void elarm_2_Tick(object sender, EventArgs e)
@@ -1753,7 +1622,7 @@ namespace сорт
             else
             {
                 elarm_2.Stop();
-                blink = 0;
+                //blink = 0;
             }
             stop1++;
 
@@ -1762,6 +1631,8 @@ namespace сорт
         private void button7_Click(object sender, EventArgs e)
         {
             Form2 form = new Form2();
+            form.button = button7;
+            button7.Enabled = false;
             switch (comboBox2.SelectedItem)
             {
                 case "сортировка пузырьком":

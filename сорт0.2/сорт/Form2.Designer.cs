@@ -45,19 +45,20 @@
             this.textBox1.Location = new System.Drawing.Point(0, 0);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(460, 480);
+            this.textBox1.Size = new System.Drawing.Size(460, 453);
             this.textBox1.TabIndex = 0;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 480);
+            this.ClientSize = new System.Drawing.Size(460, 453);
             this.Controls.Add(this.textBox1);
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(478, 527);
+            this.MinimumSize = new System.Drawing.Size(478, 500);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "Информация";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.Resize += new System.EventHandler(this.Form2_Resize);
             this.ResumeLayout(false);

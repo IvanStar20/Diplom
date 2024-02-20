@@ -26,7 +26,9 @@ namespace сорт
 
         public List<string> fails = new List<string>();
 
-        public string clean()
+        public Button button;
+
+        /*public string clean()
         {
             FileInfo fi = new FileInfo(name);
             string[] splitfail = fi.FullName.Split(new char[] { '\\' });
@@ -38,13 +40,14 @@ namespace сорт
             fails.Remove("Debug");
             string complit = String.Join("\\", fails);
             return complit;
-        }
+        }*/
       
-        public async void read()
+        public void read()
         {
             string text = "";
-            string pas = clean();
-            using (StreamReader reader = new StreamReader(pas, Encoding.GetEncoding(1251)))
+            //string pas = clean();
+            FileInfo file = new FileInfo(name);
+            using (StreamReader reader = new StreamReader(file.FullName, Encoding.GetEncoding(1251)))
             {
                 text = reader.ReadToEnd();
             }
@@ -61,6 +64,11 @@ namespace сорт
 
             Font font = new Font("Times New Roman", this.Width/100 + 10 > 10?this.Width / 100 + 5:10);
             textBox1.Font = font;
+        }
+
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            button.Enabled = true;
         }
     }
 }

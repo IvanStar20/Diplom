@@ -67,12 +67,13 @@
             this.elarm_2 = new System.Windows.Forms.Timer(this.components);
             this.ipros = new System.Windows.Forms.Label();
             this.kpros = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(8, 669);
+            this.button2.Location = new System.Drawing.Point(8, 706);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 50);
@@ -99,12 +100,12 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(115, 669);
+            this.button4.Location = new System.Drawing.Point(115, 706);
             this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 50);
             this.button4.TabIndex = 5;
-            this.button4.Text = "удалить элементв";
+            this.button4.Text = "удалить элементы\r\n";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -114,7 +115,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(115, 723);
+            this.button5.Location = new System.Drawing.Point(115, 760);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 50);
@@ -125,7 +126,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(8, 723);
+            this.button6.Location = new System.Drawing.Point(8, 760);
             this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 50);
@@ -147,7 +148,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(224, 683);
+            this.comboBox1.Location = new System.Drawing.Point(221, 727);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(233, 24);
@@ -156,7 +157,7 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(463, 735);
+            this.trackBar1.Location = new System.Drawing.Point(566, 775);
             this.trackBar1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(211, 56);
@@ -166,7 +167,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(477, 716);
+            this.label1.Location = new System.Drawing.Point(580, 756);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 16);
             this.label1.TabIndex = 12;
@@ -174,16 +175,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(221, 665);
+            this.label2.Location = new System.Drawing.Point(218, 709);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 16);
+            this.label2.Size = new System.Drawing.Size(236, 16);
             this.label2.TabIndex = 13;
-            this.label2.Text = "Длинна массива";
+            this.label2.Text = "Длина случайного массива данных\r\n";
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(224, 735);
+            this.textBox1.Location = new System.Drawing.Point(327, 775);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(233, 34);
             this.textBox1.TabIndex = 14;
@@ -217,7 +218,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(221, 716);
+            this.label3.Location = new System.Drawing.Point(324, 756);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(218, 16);
             this.label3.TabIndex = 17;
@@ -238,10 +239,10 @@
             // 
             // button7
             // 
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(437, 2);
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button7.Location = new System.Drawing.Point(1262, 5);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(300, 35);
+            this.button7.Size = new System.Drawing.Size(208, 31);
             this.button7.TabIndex = 25;
             this.button7.Text = "информация о сортировке!";
             this.button7.UseVisualStyleBackColor = true;
@@ -323,12 +324,23 @@
             this.kpros.Size = new System.Drawing.Size(0, 46);
             this.kpros.TabIndex = 27;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(221, 760);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 50);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "прервать сортировку";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1482, 776);
+            this.ClientSize = new System.Drawing.Size(1482, 821);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.kpros);
             this.Controls.Add(this.ipros);
             this.Controls.Add(this.button7);
@@ -398,6 +410,7 @@
         private System.Windows.Forms.Timer elarm_2;
         private System.Windows.Forms.Label ipros;
         private System.Windows.Forms.Label kpros;
+        private System.Windows.Forms.Button button1;
     }
 }
 
