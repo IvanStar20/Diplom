@@ -68,6 +68,7 @@
             this.ipros = new System.Windows.Forms.Label();
             this.kpros = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -334,12 +335,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(1262, 42);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(208, 33);
+            this.button8.TabIndex = 29;
+            this.button8.Text = "Настройки";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1482, 821);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.kpros);
             this.Controls.Add(this.ipros);
@@ -411,6 +423,7 @@
         private System.Windows.Forms.Label ipros;
         private System.Windows.Forms.Label kpros;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button8;
     }
 }
 

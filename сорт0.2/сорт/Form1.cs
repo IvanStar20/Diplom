@@ -74,6 +74,8 @@ namespace сорт
         // public int sizechengt = 0;
         public int combo1selected = 0;
         public List<int> random = new List<int>();
+        //public Color FormColor;
+        public Color BlockColor = Color.Black;
         //Пораметры элемента
         public void box(string gatname, int gatx, int gaty, string gattext, int wight, int textsize)
         {
@@ -84,8 +86,8 @@ namespace сорт
             picture.Text = gattext;
             picture.Font = new Font("Calibri", textsize);
             picture.Padding = new Padding(5);
-            picture.ForeColor = Color.White;
-            picture.BackColor = Color.Black;
+            picture.ForeColor = this.BackColor;
+            picture.BackColor = BlockColor;
             picture.Name = gatname;
             picture.TextAlign = ContentAlignment.MiddleCenter;
             picture.Location = new Point(x, y);
@@ -748,8 +750,8 @@ namespace сорт
             }
             else
             {
-                b1.BackColor = Color.Black;
-                b2.BackColor = Color.Black;
+                b1.BackColor = BlockColor;
+                b2.BackColor = BlockColor;
                 Thread.Sleep(50);
                 string name = b1.Name;
                 b1.Name = b2.Name;
@@ -1121,15 +1123,15 @@ namespace сорт
                 {
                     greenj = 1;
                 }
-                if ((this.Controls.Find((i1).ToString(), true).First() as Label).BackColor == System.Drawing.Color.Black && (this.Controls.Find((j1).ToString(), true).First() as Label).BackColor == System.Drawing.Color.Black)
+                if ((this.Controls.Find((i1).ToString(), true).First() as Label).BackColor == BlockColor && (this.Controls.Find((j1).ToString(), true).First() as Label).BackColor == BlockColor)
                 {
                     (this.Controls.Find((i1).ToString(), true).First() as Label).BackColor = color;
                     (this.Controls.Find((j1).ToString(), true).First() as Label).BackColor = color;
                 }
                 else
                 {
-                    (this.Controls.Find((i1).ToString(), true).First() as Label).BackColor = Color.Black;
-                    (this.Controls.Find((j1).ToString(), true).First() as Label).BackColor = Color.Black;
+                    (this.Controls.Find((i1).ToString(), true).First() as Label).BackColor = BlockColor;
+                    (this.Controls.Find((j1).ToString(), true).First() as Label).BackColor = BlockColor;
                 }
                 if (stop1 == 6)
                 {
@@ -1152,8 +1154,8 @@ namespace сорт
                         }
                         else
                         {
-                            (this.Controls.Find((i1).ToString(), true).First() as Label).BackColor = Color.Black;
-                            (this.Controls.Find((j1).ToString(), true).First() as Label).BackColor = Color.Black;
+                            (this.Controls.Find((i1).ToString(), true).First() as Label).BackColor = BlockColor;
+                            (this.Controls.Find((j1).ToString(), true).First() as Label).BackColor = BlockColor;
                         }
                     }
                     stop1 = 0;
@@ -1571,7 +1573,7 @@ namespace сорт
 
         public int startof;
         public int andof;
-        public int blink = 12;
+        public int blink;
         public void elarm2chek()
         {
             elarm_2.Interval = 200;
@@ -1580,12 +1582,12 @@ namespace сорт
                 case "сортировка пузырьком":
                     startof = 0;
                     andof = and1;
-                    //blink = 12;
+                    blink = 12;
                     break;
                 case "сортировка перемешиванием":
                     startof = hod2;
                     andof = and1;
-                    //blink = 12;
+                    blink = 12;
                     break;
             }
         }
@@ -1600,11 +1602,24 @@ namespace сорт
             button4_Click(sender, e);
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //FormColor = this.BackColor;
+            Settings settings = new Settings();
+            settings.FormColor = this.BackColor;
+            settings.BlokColor = BlockColor;
+            settings.form = this;
+            settings.ShowDialog();
+            if(settings.Save)
+            BlockColor = settings.BlokColor;
+            //MessageBox.Show(BlockColor.Name);
+        }
+
         private void elarm_2_Tick(object sender, EventArgs e)
         {
             if (stop1 < blink)
             {
-                if ((this.Controls.Find(startof.ToString(), true).First() as Label).BackColor == System.Drawing.Color.Black)
+                if ((this.Controls.Find(startof.ToString(), true).First() as Label).BackColor == BlockColor)
                 {
                     for (int j = startof; j < andof; j++)
                     {
@@ -1615,7 +1630,7 @@ namespace сорт
                 {
                     for (int j = startof; j < andof; j++)
                     {
-                        (this.Controls.Find(j.ToString(), true).First() as Label).BackColor = Color.Black;
+                        (this.Controls.Find(j.ToString(), true).First() as Label).BackColor = BlockColor;
                     }
                 }
             }
