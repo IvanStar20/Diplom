@@ -10,7 +10,7 @@ namespace сорт
 {
     internal class Shak
     {
-       // public void finish { set; get; }
+       /*public void finish { set; get; }
         public Label b1;
         public Label b2;
         public int b1x;
@@ -43,7 +43,7 @@ namespace сорт
             
         }*/
 
-        public void rand(int count)
+        /*public void rand(int count)
         {
             List<int> list = new List<int>();
             for (int i = 0; i < count; i++)
@@ -60,7 +60,7 @@ namespace сорт
                     list.Remove(n);
                 }
             }
-        }
+        }*/
 
         /*public void finish()
         {
@@ -108,7 +108,7 @@ namespace сорт
 
         }*/
 
-        private void button2_Click(object sender, EventArgs e)
+        /*private void button2_Click(object sender, EventArgs e)
         {
 
         }
@@ -131,7 +131,7 @@ namespace сорт
                 muve.Stop();
                 down.Start();
             }
-        }
+        }*/
 
         /*private void button3_Click(object sender, EventArgs e)
         {
@@ -147,10 +147,10 @@ namespace сорт
             spid = Convert.ToInt32(trackBar1.Value);
             timer1.Start();
         }*/
-        public Timer up = new Timer();
+        /*public Timer up = new Timer();
         public Timer muve = new Timer();
         public Timer down = new Timer();
-        public Timer timer1 = new Timer();
+        public Timer timer1 = new Timer();*/
         /*private void button4_Click(object sender, EventArgs e)
         {
             up.Stop();
@@ -178,7 +178,7 @@ namespace сорт
             listBox1.Items.Clear();
 
         }*/
-        public int and = 0;
+        /*public int and = 0;
         public int and1 = 0;
         public void stop()
         {
@@ -353,7 +353,7 @@ namespace сорт
             }
 
         }
-        /*
+        
             int chek = 0;
             int repit = 0;
             int numm = 0;
@@ -383,7 +383,7 @@ namespace сорт
             for (int i = 0; i < sort.Length; i++)
             {
                 Console.Write($"{sort[i]} ,");
-            }
-         */
+            }*/
+         
     }
 }

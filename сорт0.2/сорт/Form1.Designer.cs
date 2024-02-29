@@ -149,7 +149,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(221, 727);
+            this.comboBox1.Location = new System.Drawing.Point(221, 730);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(233, 24);
@@ -176,7 +176,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(218, 709);
+            this.label2.Location = new System.Drawing.Point(218, 712);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(236, 16);
             this.label2.TabIndex = 13;
@@ -212,9 +212,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(5, 12);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 16);
+            this.label4.Size = new System.Drawing.Size(108, 16);
             this.label4.TabIndex = 16;
-            this.label4.Text = "вид сортирови:";
+            this.label4.Text = "Вид сортирови:";
             // 
             // label3
             // 
@@ -245,7 +245,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(208, 31);
             this.button7.TabIndex = 25;
-            this.button7.Text = "информация о сортировке!";
+            this.button7.Text = "Информация о сортировке!";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

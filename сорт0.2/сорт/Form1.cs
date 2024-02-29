@@ -45,11 +45,14 @@ namespace сорт
             comboBox2.Anchor = AnchorStyles.Left | AnchorStyles.Top;
             textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
             button7.Anchor = AnchorStyles.Right | AnchorStyles.Top;
+            button8.Anchor = AnchorStyles.Right | AnchorStyles.Top;
             kpros.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             ipros.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             label1.Text = $"Скорость анимации : {trackBar1.Value}";
             button3.Enabled = false;
             button3.Visible = false;
+            button5.Enabled = false;
+            button6.Enabled = false;
 
         }
 
@@ -242,13 +245,25 @@ namespace сорт
                 rand(Convert.ToInt32(comboBox1.SelectedItem));
                 newbox();
                 button2.Enabled = false;
+                button6.Enabled = true;
                 comboBox2.Enabled = false;
             }
             else
             {
                 string text = textBox1.Text;
                 string[] words = text.Split(new char[] { ',' });
-                int good = 0;
+                if(int.TryParse(String.Join("",words), out int o))
+                {
+                    for (int i = 0; i < words.Length; i++)
+                    {
+                        random.Add(Convert.ToInt32(words[i]));
+                    }
+                    newbox();
+                    button2.Enabled = false;
+                    button6.Enabled = true;
+                    comboBox2.Enabled = false;
+                }
+                /*int good = 0;
                 for (int i = 0; i < words.Length; i++)
                 {
                     if (int.TryParse(words[i], out int o) == true)
@@ -265,7 +280,7 @@ namespace сорт
                     newbox();
                     button2.Enabled = false;
                     comboBox2.Enabled = false;
-                }
+                }*/
                 else
                 {
                     MessageBox.Show("Ошибка массива данных !\nВозможные причины:\n1) Указанны не верные данные.\n2) Ввод данных выполнен не правильно.\nДанные должны вводится через запятую без пробелов !\nВ конце не должно быть запятой !");
@@ -374,11 +389,6 @@ namespace сорт
             up.Stop();
             muve.Stop();
             down.Stop();
-            //timer1.Stop();
-            //laft.Stop();
-            //right.Stop();
-            //sortinsert.Stop();
-            //chaksvop.Stop();
             elarm.Stop();
             elarm_2.Stop();
             appinsert.Stop();
@@ -389,7 +399,6 @@ namespace сорт
             coutindex.Stop();
             startcort.Stop();
             goinplase.Stop();
-            //countsort2out.Stop();
             countsort2in.Stop();
             goinplase_2.Stop();
         }
@@ -455,6 +464,8 @@ namespace сорт
                 ProgremStatus = true;
                 button2.Enabled = true;
                 button3.Enabled = true;
+                button5.Enabled = false;
+                button6.Enabled = false;
                 comboBox2.Enabled = true;
             }
             else
@@ -549,6 +560,7 @@ namespace сорт
                         i++;
                         j++;
                         count++;
+                        proces = 11;
                         timer1.Stop();
                         elarmchak();
                         elarm.Start();
@@ -572,30 +584,33 @@ namespace сорт
         //Кнопка стоп
         private void button5_Click(object sender, EventArgs e)
         {
-            if (random.Count == 0)
+            stopstatus = false;
+            button6.Enabled = true;
+            button5.Enabled = false;
+            /*if (random.Count == 0)
             {
                 MessageBox.Show("Элементы не добавленны !");
                 return;
-            }
-            stopstatus = false;
+            }*/
             fullstopanim();
             MessageBox.Show(proces.ToString() + stopstatus + countsort2in.Enabled);
         }
         //Кнопка старт
         private void button6_Click(object sender, EventArgs e)
         {
-            if(random.Count == 0)
+            stopstatus = true;
+            button6.Enabled = false;
+            button5.Enabled = true;
+            /*if(random.Count == 0)
             {
                 MessageBox.Show("Элементы не добавленны !");
                 return;
-            }
+            }*/
             if (ProgremStatus)
             {
                 StarProgrem();
                 ProgremStatus = false;
             }
-            stopstatus = true;
-            MessageBox.Show(proces.ToString() + stopstatus + countsort2in.Enabled);
             switch (proces)
             {
                 case 0:
@@ -643,7 +658,7 @@ namespace сорт
                 case 14:
                     goinplase_2.Start();
                     break;
-                /*case 100:
+                case 100:
                     timer1.Start();
                     break;
                 case 200:
@@ -651,8 +666,12 @@ namespace сорт
                     break;
                 case 300:
                     right.Start();
-                    break;*/
+                    break;
+                case 500:
+                    countsort2out.Start();
+                    break;
             }
+            MessageBox.Show($"{proces}" + stopstatus + countsort2in.Enabled);
 
         }
         //Анимации движения при сортировке перемешивание и сортировки пузырьком
@@ -840,6 +859,7 @@ namespace сорт
                     }
                     else
                     {
+                        proces = 11;
                         laft.Stop();
                         elarmchak();
                         elarm.Start();
@@ -890,6 +910,7 @@ namespace сорт
                     }
                     else
                     {
+                        proces = 11;
                         right.Stop();
                         elarmchak();
                         elarm.Start();
@@ -983,6 +1004,7 @@ namespace сорт
                     }
                     else
                     {
+                        proces = 11;
                         chaksvop.Stop();
                         random[j] = chakvalue;
                         elarmchak();
@@ -1063,8 +1085,9 @@ namespace сорт
                 interval = 0;
                 godown.Stop();
                 list.Clear();
-                sortinsert.Start();
                 proces = 400;
+                sortinsert.Start();
+                
             }
         }
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
@@ -1472,20 +1495,22 @@ namespace сорт
                     if (counttwo < count1)
                     {
                         green = 1;
+                        proces = 11;
                         countsort2in.Stop();
                         elarmchak();
                         elarm.Start();
-                        proces = 11;
+                        
                     }
                 }
                 else
                 {
                     if (counttwo < count1)
                     {
+                        proces = 11;
                         countsort2in.Stop();
                         elarmchak();
                         elarm.Start();
-                        proces = 11;
+                        
                     }
                 }
                 counttwo++;
@@ -1633,13 +1658,14 @@ namespace сорт
                         (this.Controls.Find(j.ToString(), true).First() as Label).BackColor = BlockColor;
                     }
                 }
+                stop1++;
             }
             else
             {
                 elarm_2.Stop();
                 //blink = 0;
             }
-            stop1++;
+            //stop1++;
 
         }
 
