@@ -63,10 +63,10 @@ C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.csproj.SuggestedBindingRedirects.cache
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.Form1.resources
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.Form2.resources
-C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.Management.resources
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.Properties.Resources.resources
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.csproj.GenerateResource.cache
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.csproj.CoreCompileInputs.cache
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.exe
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.pdb
 C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.Settings.resources
+C:\Users\ivans\OneDrive\Рабочий стол\проект иван\сорт0.2\сорт\obj\Debug\сорт.User_hellp.resources

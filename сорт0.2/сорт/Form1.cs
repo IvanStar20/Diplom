@@ -35,10 +35,7 @@ namespace сорт
             {
                 (this.Controls.Find("label" + i, true).First() as Label).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
             }
-            //for (int i = 2; i < 3; i++)
-            //{
-                (this.Controls.Find("textbox1", true).First() as TextBox).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            //}
+            (this.Controls.Find("textbox1", true).First() as TextBox).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
             trackBar1.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
             label4.Anchor = AnchorStyles.Left | AnchorStyles.Top;
             comboBox1.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
@@ -49,8 +46,6 @@ namespace сорт
             kpros.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             ipros.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             label1.Text = $"Скорость анимации : {trackBar1.Value}";
-            button3.Enabled = false;
-            button3.Visible = false;
             button5.Enabled = false;
             button6.Enabled = false;
 
@@ -74,10 +69,8 @@ namespace сорт
         public int selected = 0;
         public bool stopstatus = true;
         public bool ProgremStatus = true;
-        // public int sizechengt = 0;
         public int combo1selected = 0;
         public List<int> random = new List<int>();
-        //public Color FormColor;
         public Color BlockColor = Color.Black;
         //Пораметры элемента
         public void box(string gatname, int gatx, int gaty, string gattext, int wight, int textsize)
@@ -263,24 +256,6 @@ namespace сорт
                     button6.Enabled = true;
                     comboBox2.Enabled = false;
                 }
-                /*int good = 0;
-                for (int i = 0; i < words.Length; i++)
-                {
-                    if (int.TryParse(words[i], out int o) == true)
-                    {
-                        good++;
-                    }
-                }
-                if (good == words.Length)
-                {
-                    for (int i = 0; i < words.Length; i++)
-                    {
-                        random.Add(Convert.ToInt32(words[i]));
-                    }
-                    newbox();
-                    button2.Enabled = false;
-                    comboBox2.Enabled = false;
-                }*/
                 else
                 {
                     MessageBox.Show("Ошибка массива данных !\nВозможные причины:\n1) Указанны не верные данные.\n2) Ввод данных выполнен не правильно.\nДанные должны вводится через запятую без пробелов !\nВ конце не должно быть запятой !");
@@ -346,7 +321,8 @@ namespace сорт
         //Кнопка запуска
         private void button3_Click(object sender, EventArgs e)
         {
-            
+            User_hellp Hellp = new User_hellp();
+            Hellp.ShowDialog();
         }
 
         public void fullcliar()
@@ -587,11 +563,6 @@ namespace сорт
             stopstatus = false;
             button6.Enabled = true;
             button5.Enabled = false;
-            /*if (random.Count == 0)
-            {
-                MessageBox.Show("Элементы не добавленны !");
-                return;
-            }*/
             fullstopanim();
             MessageBox.Show(proces.ToString() + stopstatus + countsort2in.Enabled);
         }
@@ -601,11 +572,6 @@ namespace сорт
             stopstatus = true;
             button6.Enabled = false;
             button5.Enabled = true;
-            /*if(random.Count == 0)
-            {
-                MessageBox.Show("Элементы не добавленны !");
-                return;
-            }*/
             if (ProgremStatus)
             {
                 StarProgrem();
@@ -795,7 +761,6 @@ namespace сорт
                         }
                         break;
                     case "сортировка вставками":
-                        //proces = 401;
                         chaksvop.Start();
                         break;
                 }
@@ -1009,7 +974,6 @@ namespace сорт
                         random[j] = chakvalue;
                         elarmchak();
                         elarm.Start();
-                        //sortinsert.Start();
                     }
 
                 }
@@ -1366,7 +1330,6 @@ namespace сорт
         private void countsort_Tick(object sender, EventArgs e)
         {
             proces = 9;
-            //if(stopstatus)
             if (countindex[i2] > 0)
             {
                 sorted[index] = i2;
@@ -1459,22 +1422,18 @@ namespace сорт
         public int k = 0;
         private void countsort2out_Tick(object sender, EventArgs e)
         {
-            //proces = 12;
             if (stopstatus && proces == 500)
                 if (count < count1)
                 {
                     chak = random[count];
-                    //(this.Controls.Find("t".ToString(), true).First() as Label).Text = $"chak = {chak}";
                     pic1.Location = new Point((this.Controls.Find(count.ToString(), true).First() as Label).Location.X + white / 8, y - white * 2);
                     (this.Controls.Find("ipros".ToString(), true).First() as Label).Text = $"i = {count}";
                     (this.Controls.Find("kpros".ToString(), true).First() as Label).Text = $"k = {k}";
                     countsort2in.Start();
                     proces = 13;
-                    //countsort2out.Stop();
                 }
                 else
                 {
-                    //fullstop();
                     countsort2out.Stop();
                     MessageBox.Show("END OF SORT");
                 }
@@ -1538,14 +1497,12 @@ namespace сорт
             {
                 goinplase_2.Stop();
                 b2.Visible = false;
-                //(this.Controls.Find(count.ToString(), true).First() as Label).BackColor = Color.Black;
                 (this.Controls.Find("s" + b1.Name.ToString(), true).First() as Label).BackColor = Color.Green;
                 count++;
                 k = 0;
                 (this.Controls.Find("kpros".ToString(), true).First() as Label).Text = $"k = {k}";
                 counttwo = 0;
                 top = 0;
-                //pic1.Location = new Point((this.Controls.Find(count.ToString(), true).First() as Label).Location.X, y - size);
                 countsort2out.Start();
                 proces = 500;
             }
@@ -1629,7 +1586,6 @@ namespace сорт
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //FormColor = this.BackColor;
             Settings settings = new Settings();
             settings.FormColor = this.BackColor;
             settings.BlokColor = BlockColor;
@@ -1637,7 +1593,6 @@ namespace сорт
             settings.ShowDialog();
             if(settings.Save)
             BlockColor = settings.BlokColor;
-            //MessageBox.Show(BlockColor.Name);
         }
 
         private void elarm_2_Tick(object sender, EventArgs e)
@@ -1663,9 +1618,7 @@ namespace сорт
             else
             {
                 elarm_2.Stop();
-                //blink = 0;
             }
-            //stop1++;
 
         }
 
