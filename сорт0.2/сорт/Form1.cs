@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -27,25 +28,6 @@ namespace сорт
             comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             trackBar1.Minimum = 2;
             trackBar1.Maximum = 5;
-            for (int i = 1; i < 7; i++)
-            {
-                (this.Controls.Find("button" + i, true).First() as Button).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            }
-            for (int i = 1; i < 5; i++)
-            {
-                (this.Controls.Find("label" + i, true).First() as Label).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            }
-            (this.Controls.Find("textbox1", true).First() as TextBox).Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            trackBar1.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            label4.Anchor = AnchorStyles.Left | AnchorStyles.Top;
-            comboBox1.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            comboBox2.Anchor = AnchorStyles.Left | AnchorStyles.Top;
-            textBox1.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-            button7.Anchor = AnchorStyles.Right | AnchorStyles.Top;
-            button8.Anchor = AnchorStyles.Right | AnchorStyles.Top;
-            kpros.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
-            ipros.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
-            label1.Text = $"Скорость анимации : {trackBar1.Value}";
             button5.Enabled = false;
             button6.Enabled = false;
 
@@ -126,7 +108,7 @@ namespace сорт
             {
                 (this.Controls.Find(0.ToString(), true).First() as Label).BackColor = Color.Green;
             }
-            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
             proces = -1;
             finishishir = 1;
             MessageBox.Show("END OF SORT");
@@ -225,21 +207,28 @@ namespace сорт
                     countn();
                     break;
             }
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            button3.Enabled = false;
+            this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            button9.Enabled = false;
 
         }
+        public void BlokIt()
+        {
+            button2.Enabled = false;
+            button6.Enabled = true;
+            comboBox2.Enabled = false;
+            comboBox1.Enabled = false;
+            textBox1.Enabled = false;
+        }
+
         //Кнопка добавения элементов
         private void button1_Click(object sender, EventArgs e)
         {
-
+            
             if (textBox1.Text.Length == 0)
             {
                 rand(Convert.ToInt32(comboBox1.SelectedItem));
                 newbox();
-                button2.Enabled = false;
-                button6.Enabled = true;
-                comboBox2.Enabled = false;
+                BlokIt();
             }
             else
             {
@@ -252,9 +241,7 @@ namespace сорт
                         random.Add(Convert.ToInt32(words[i]));
                     }
                     newbox();
-                    button2.Enabled = false;
-                    button6.Enabled = true;
-                    comboBox2.Enabled = false;
+                    BlokIt();
                 }
                 else
                 {
@@ -317,12 +304,6 @@ namespace сорт
 
             }
 
-        }
-        //Кнопка запуска
-        private void button3_Click(object sender, EventArgs e)
-        {
-            User_hellp Hellp = new User_hellp();
-            Hellp.ShowDialog();
         }
 
         public void fullcliar()
@@ -414,7 +395,7 @@ namespace сорт
                 {
                     (this.Controls.Find(i.ToString(), true).First() as Label).Dispose();
                 }
-                if (button3.Enabled == false)
+                if (button9.Enabled == false)
                 {
                     fullcliar();
                     timer1.Stop();
@@ -435,14 +416,16 @@ namespace сорт
                 list3.Clear();
                 list2.Clear();
                 list.Clear();
-                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
                 stopstatus = true;
                 ProgremStatus = true;
                 button2.Enabled = true;
-                button3.Enabled = true;
+                button9.Enabled = true;
                 button5.Enabled = false;
                 button6.Enabled = false;
+                comboBox1.Enabled = true;
                 comboBox2.Enabled = true;
+                textBox1.Enabled = true;
             }
             else
             {
@@ -1579,11 +1562,6 @@ namespace сорт
             //selected = 1;
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            button4_Click(sender, e);
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
             Settings settings = new Settings();
@@ -1593,6 +1571,67 @@ namespace сорт
             settings.ShowDialog();
             if(settings.Save)
             BlockColor = settings.BlokColor;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            panel1.Height = 30;
+            FileInfo file = new FileInfo("text//settings.txt");
+            if (file.Exists && file.Length > 0)
+            {
+                string[] setting_data = File.ReadAllText(file.FullName).Split(',');
+                this.BackColor = Color.FromName($"{setting_data[0]}");
+                BlockColor = Color.FromName($"{setting_data[1]}");
+
+            }
+            else
+            {
+                file.Create();
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+            FileInfo file = new FileInfo("text//settings.txt");
+            if (file.Exists)
+            {
+                File.WriteAllText(file.FullName, $"{this.BackColor.Name},{BlockColor.Name}");
+            }
+        }
+        bool focus = true;
+        private void panel1_MouseEnter(object sender, EventArgs e)
+        {
+            focus = true;
+            Task.Run(() => {
+                while (focus && panel1.Height <= 160)
+                {
+                    Thread.Sleep(10);
+                    Invoke((MethodInvoker)delegate {
+                        panel1.Height += 10;
+                    });
+                }
+            });
+        }
+
+        private void panel1_MouseLeave(object sender, EventArgs e)
+        {
+            focus = false;
+            Task.Run(() => {
+                while (!focus && panel1.Height > 30)
+                {
+                    Thread.Sleep(10);
+                    Invoke((MethodInvoker)delegate {
+                        panel1.Height -= 10;
+                    });
+                }
+            });
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            User_hellp Hellp = new User_hellp();
+            Hellp.ShowDialog();
         }
 
         private void elarm_2_Tick(object sender, EventArgs e)
