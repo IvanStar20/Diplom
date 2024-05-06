@@ -198,7 +198,6 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(312, 24);
             this.comboBox2.TabIndex = 15;
-            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2_SelectionChangeCommitted);
             // 
             // laft
             // 
@@ -243,7 +242,7 @@
             // button7
             // 
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(10, 39);
+            this.button7.Location = new System.Drawing.Point(3, 71);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(212, 35);
             this.button7.TabIndex = 25;
@@ -344,7 +343,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(10, 80);
+            this.button8.Location = new System.Drawing.Point(3, 112);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(212, 35);
             this.button8.TabIndex = 29;
@@ -361,16 +360,16 @@
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button8);
-            this.panel1.Location = new System.Drawing.Point(1242, 12);
+            this.panel1.Location = new System.Drawing.Point(1228, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(228, 174);
+            this.panel1.Size = new System.Drawing.Size(219, 210);
             this.panel1.TabIndex = 30;
             this.panel1.MouseEnter += new System.EventHandler(this.panel1_MouseEnter);
             this.panel1.MouseLeave += new System.EventHandler(this.panel1_MouseLeave);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(10, 121);
+            this.button9.Location = new System.Drawing.Point(3, 153);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(212, 40);
             this.button9.TabIndex = 32;
@@ -384,7 +383,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(7, 2);
+            this.label5.Location = new System.Drawing.Point(3, 8);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(204, 16);
             this.label5.TabIndex = 30;
@@ -398,7 +397,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1482, 821);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.kpros);
             this.Controls.Add(this.ipros);
@@ -414,6 +412,7 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
+            this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

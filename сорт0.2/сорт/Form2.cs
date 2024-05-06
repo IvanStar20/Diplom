@@ -28,35 +28,10 @@ namespace сорт
 
         public Button button;
 
-        /*public string clean()
-        {
-            FileInfo fi = new FileInfo(name);
-            string[] splitfail = fi.FullName.Split(new char[] { '\\' });
-            foreach(string s in splitfail)
-            {
-                fails.Add(s);
-            }
-            fails.Remove("bin");
-            fails.Remove("Debug");
-            string complit = String.Join("\\", fails);
-            return complit;
-        }*/
-      
-        public void read()
-        {
-            string text = "";
-            //string pas = clean();
-            FileInfo file = new FileInfo(name);
-            using (StreamReader reader = new StreamReader(file.FullName, Encoding.GetEncoding(1251)))
-            {
-                text = reader.ReadToEnd();
-            }
-            textBox1.Text = text;
-        }
-
         private void Form2_Load(object sender, EventArgs e)
         {
-            read();
+            FileInfo file = new FileInfo(name);
+            textBox1.Text = File.ReadAllText(file.FullName, Encoding.UTF8);
         }
 
         private void Form2_Resize(object sender, EventArgs e)

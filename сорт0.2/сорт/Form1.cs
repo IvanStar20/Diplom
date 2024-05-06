@@ -23,7 +23,7 @@ namespace сорт
             comboBox1.Items.AddRange(new string[] { "4", "5", "6", "7", "8", "9", "10" });
             comboBox1.SelectedIndex = 0;
             comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBox2.Items.AddRange(new string[] { "сортировка пузырьком", "сортировка перемешиванием", "сортировка вставками", /*"сортировка подсчетом"*/"сортировка подсчетом 2" });
+            comboBox2.Items.AddRange(new string[] { "сортировка пузырьком", "сортировка перемешиванием", "сортировка вставками", "сортировка подсчетом" ,"сортировка подсчетом 2" });
             comboBox2.SelectedIndex = 0;
             comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             trackBar1.Minimum = 2;
@@ -234,7 +234,7 @@ namespace сорт
             {
                 string text = textBox1.Text;
                 string[] words = text.Split(new char[] { ',' });
-                if(int.TryParse(String.Join("",words), out int o))
+                if(int.TryParse(String.Join("",words), out int o) && !words.Contains(""))
                 {
                     for (int i = 0; i < words.Length; i++)
                     {
@@ -537,7 +537,6 @@ namespace сорт
                     }
 
                 }
-
 
         }
         //Кнопка стоп
@@ -1231,8 +1230,8 @@ namespace сорт
                     for (int i = 0; i < list2.Count; i++)
                     {
                         x = (this.Controls.Find(i.ToString(), true).First() as Label).Location.X;
-                        box("0" + list2[i].ToString(), x, y, list2[i].ToString(), white, white / 2);
-                        addlabel("l" + list2[i].ToString(), x, y + (white - white / 4), 0.ToString(), white, white / 2, 0);
+                        box("0" + list2[i].ToString(), x, y + white + white / 4, list2[i].ToString(), white, white / 2);
+                        addlabel("l" + list2[i].ToString(), x, y + white * 2, 0.ToString(), white, white / 2, 0);
                     }
                     countindex = new int[max + 1];
                     coutindex.Start();
@@ -1275,6 +1274,7 @@ namespace сорт
                 }
                 sorted = new int[random.Count];
                 countsort.Start();
+                proces = 9;
             }
             if (x == 0)
             {
@@ -1299,12 +1299,14 @@ namespace сорт
         public int c = 0;
         private void startcort_Tick(object sender, EventArgs e)
         {
-            proces = 8;
+            //proces = 8;
+            if(stopstatus && proces == 8)
             if (i2 < countindex.Length)
             {
                 i2++;
                 countsort.Start();
                 startcort.Stop();
+                proces = 9;
 
             }
 
@@ -1312,23 +1314,26 @@ namespace сорт
 
         private void countsort_Tick(object sender, EventArgs e)
         {
-            proces = 9;
+            //proces = 9;
+            if(stopstatus && proces == 9)
             if (countindex[i2] > 0)
             {
                 sorted[index] = i2;
                 int x = (this.Controls.Find("0" + i2.ToString(), true).First() as Label).Location.X;
                 b2 = (this.Controls.Find(index.ToString(), true).First() as Label);
-                b1 = addlabel("b" + i2.ToString(), x, y, i2.ToString(), white, white / 2, 1);
+                b1 = addlabel("b" + i2.ToString(), x, y + white, i2.ToString(), white, white / 2, 1);
                 index++;
                 countindex[i2]--;
                 (this.Controls.Find("l" + i2.ToString(), true).First() as Label).Text = countindex[i2].ToString();
                 (this.Controls.Find(("0" + i2).ToString(), true).First() as Label).BackColor = Color.Red;
                 goinplase.Start();
+                proces = 10;
                 c++;
             }
             else
             {
                 startcort.Start();
+                proces = 8;
             }
         }
         public int sdvig1 = 0;
@@ -1369,6 +1374,7 @@ namespace сорт
                         (this.Controls.Find(("0" + i2).ToString(), true).First() as Label).BackColor = Color.Black;
                         goinplase.Stop();
                         countsort.Start();
+                        proces = 9;
                         sdvig1 = 0;
                         sdvig2 = 0;
                         if (c == random.Count)
@@ -1380,7 +1386,7 @@ namespace сорт
                             sdvig1 = 0;
                             sdvig2 = 0;
                             proces = 15;
-                            MessageBox.Show(proces.ToString());
+                            MessageBox.Show("END OF SORT");
                         }
                     }
                     break;
@@ -1557,11 +1563,6 @@ namespace сорт
             }
         }
 
-        private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            //selected = 1;
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
             Settings settings = new Settings();
@@ -1618,13 +1619,16 @@ namespace сорт
         {
             focus = false;
             Task.Run(() => {
-                while (!focus && panel1.Height > 30)
+                while (!focus && panel1.Height >= 30)
                 {
                     Thread.Sleep(10);
                     Invoke((MethodInvoker)delegate {
                         panel1.Height -= 10;
                     });
                 }
+                Invoke((MethodInvoker)delegate {
+                    panel1.Height += 5;
+                });
             });
         }
 
@@ -1656,6 +1660,10 @@ namespace сорт
             }
             else
             {
+                for (int j = startof; j < andof; j++)
+                {
+                    (this.Controls.Find(j.ToString(), true).First() as Label).BackColor = Color.Green;
+                }
                 elarm_2.Stop();
             }
 
@@ -1679,6 +1687,9 @@ namespace сорт
                     break;
                 case "сортировка подсчетом 2":
                     form.name = "text\\text4.txt";
+                    break;
+                case "сортировка подсчетом":
+                    form.name = "text\\text5.txt";
                     break;
             }
             form.Show();
